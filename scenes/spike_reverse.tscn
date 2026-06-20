@@ -1,47 +1,47 @@
-[gd_scene load_steps=14 format=3 uid="uid://d2b2d4msspn3c"]
+[gd_scene load_steps=14 format=3 uid="uid://ej5xc3xkckuj"]
 
-[ext_resource type="Script" path="res://scripts/spike_handler.gd" id="1_3u1lt"]
-[ext_resource type="Texture2D" uid="uid://cs6gt2whn4nwh" path="res://assets/textures/tilemap.png" id="1_s6u5y"]
+[ext_resource type="Script" path="res://scripts/spike_handler.gd" id="1_q4of5"]
+[ext_resource type="Texture2D" uid="uid://cs6gt2whn4nwh" path="res://assets/textures/tilemap.png" id="2_jp7hh"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ltn54"]
-atlas = ExtResource("1_s6u5y")
-region = Rect2(48, 16, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_15gek"]
+atlas = ExtResource("2_jp7hh")
+region = Rect2(48, 32, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wbflf"]
-atlas = ExtResource("1_s6u5y")
-region = Rect2(64, 16, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_tif8l"]
+atlas = ExtResource("2_jp7hh")
+region = Rect2(64, 32, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wek0o"]
-atlas = ExtResource("1_s6u5y")
-region = Rect2(80, 16, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_c36ip"]
+atlas = ExtResource("2_jp7hh")
+region = Rect2(80, 32, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_atpsg"]
-atlas = ExtResource("1_s6u5y")
-region = Rect2(48, 16, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6j6l"]
+atlas = ExtResource("2_jp7hh")
+region = Rect2(48, 32, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rqd3b"]
-atlas = ExtResource("1_s6u5y")
-region = Rect2(80, 16, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_x0rwi"]
+atlas = ExtResource("2_jp7hh")
+region = Rect2(80, 32, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wyl0s"]
-atlas = ExtResource("1_s6u5y")
-region = Rect2(64, 16, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ab0wg"]
+atlas = ExtResource("2_jp7hh")
+region = Rect2(64, 32, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_isthu"]
-atlas = ExtResource("1_s6u5y")
-region = Rect2(48, 16, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_1apew"]
+atlas = ExtResource("2_jp7hh")
+region = Rect2(48, 32, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jhxvp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ltn54")
+"texture": SubResource("AtlasTexture_15gek")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wbflf")
+"texture": SubResource("AtlasTexture_tif8l")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wek0o")
+"texture": SubResource("AtlasTexture_c36ip")
 }],
 "loop": false,
 "name": &"activated",
@@ -49,7 +49,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_atpsg")
+"texture": SubResource("AtlasTexture_a6j6l")
 }],
 "loop": true,
 "name": &"dormant",
@@ -57,13 +57,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rqd3b")
+"texture": SubResource("AtlasTexture_x0rwi")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wyl0s")
+"texture": SubResource("AtlasTexture_ab0wg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_isthu")
+"texture": SubResource("AtlasTexture_1apew")
 }],
 "loop": false,
 "name": &"retract",
@@ -86,7 +86,7 @@ size = Vector2(16, 4)
 size = Vector2(16, 14)
 
 [node name="Spike" type="Node2D"]
-script = ExtResource("1_3u1lt")
+script = ExtResource("1_q4of5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -100,14 +100,14 @@ collision_mask = 2
 script = SubResource("GDScript_s571e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger"]
-position = Vector2(0, 6)
+position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_sf0lo")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 1)
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_qxru7")
 debug_color = Color(1, 0, 0, 0.419608)
 
