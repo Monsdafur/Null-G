@@ -16,3 +16,4 @@ position = Vector2(-48, 101)
 [node name="Level" parent="." instance=ExtResource("3_rgulm")]
 position = Vector2(-240, -160)
 level = 1
+atlas_width = 8

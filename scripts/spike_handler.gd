@@ -30,18 +30,16 @@ func _on_activation_timer_timeout() -> void:
 	state = State.ACTIVATING
 	area.process_mode = Node.PROCESS_MODE_INHERIT
 	animated_sprite.play("activated")
+	await animated_sprite.animation_finished
+	state = State.IDLING
+	idle_timer.start()
 
 func _on_area_2d_body_entered(_body: Node2D) -> void:
 	game_manager.game_over.emit()
 	
 func _on_idle_timer_timeout() -> void:
 	animated_sprite.play("retract")
-	
-func _on_animated_sprite_2d_animation_finished() -> void:
-	if state == State.ACTIVATING:
-		state = State.IDLING
-		idle_timer.start()
-	elif state == State.IDLING:
-		area.process_mode = Node.PROCESS_MODE_DISABLED
-		state = State.DORMANT
-		animated_sprite.play("dormant")
+	await animated_sprite.animation_finished
+	area.process_mode = Node.PROCESS_MODE_DISABLED
+	state = State.DORMANT
+	animated_sprite.play("dormant")
