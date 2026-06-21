@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdts5utildbrv"]
+[gd_scene load_steps=4 format=3 uid="uid://bdts5utildbrv"]
 
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="1_fl2ss"]
 [ext_resource type="TileSet" uid="uid://r5i81e5cq2kb" path="res://assets/tileset/level.tres" id="2_ew0vb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j1ugi"]
+size = Vector2(4, 4)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_fl2ss")
@@ -18,3 +21,14 @@ texture_repeat = 1
 tile_set = ExtResource("2_ew0vb")
 
 [node name="Entrance" type="Node2D" parent="."]
+
+[node name="Exit" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+shape = SubResource("RectangleShape2D_j1ugi")
+
+[node name="PlayerSpawnDelay" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="Exit" to="." method="_on_exit_body_entered"]

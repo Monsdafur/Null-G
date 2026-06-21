@@ -2,12 +2,9 @@ extends Node2D
 
 @onready var player_movement = $".."
 @onready var animated_sprite = $"../AnimatedSprite2D"
-var dead: bool
 
 func _ready() -> void:
 	game_manager.game_over.connect(_on_game_manager_game_over)
-	animated_sprite.animation_finished.connect(_on_animation_finished)
-	dead = false
 
 func _process(_delta: float) -> void:
 	animated_sprite.flip_v = player_movement.reverse == -1
@@ -31,9 +28,5 @@ func _on_game_manager_game_over() -> void:
 	set_process(false)
 	animated_sprite.play("death")
 	player_movement.set_physics_process(false)
-	dead = true
-
-func _on_animation_finished() -> void:
-	if not dead:
-		return
-	get_parent().queue_free()
+	await animated_sprite.animation_finished
+	animated_sprite.visible = false

@@ -11,7 +11,6 @@ func _ready() -> void:
 	dst = p1
 	reverse = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	position = position.move_toward(dst, speed * delta)
 	if position.distance_to(dst) < 0.1:
