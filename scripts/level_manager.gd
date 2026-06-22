@@ -13,7 +13,6 @@ var ins_pressure_pad: Resource =  preload("res://scenes/pressure_pad.tscn")
 var ins_reverse_pressure_pad: Resource =  preload("res://scenes/pressure_pad_reverse.tscn")
 var ins_platform: Resource = preload("res://scenes/platform.tscn")
 var ins_spike: Resource = preload("res://scenes/spike.tscn")
-var ins_reverse_spike: Resource = preload("res://scenes/spike_reverse.tscn")
 var ins_player: Resource = preload("res://scenes/player.tscn")
 
 var exit_reversed: bool = false
@@ -95,8 +94,10 @@ func load_level() -> void:
 	
 	if json_data.has("spike"):
 		for spk in json_data["spike"]:
-			var spike: Node2D = ins_spike.instantiate() if spk["gid"] == 11 else ins_reverse_spike.instantiate()
+			var spike_reversed: bool = spk["gid"] == 19
+			var spike: Node2D = ins_spike.instantiate()
 			var spike_position: Vector2 = convert_position(Vector2(float(spk["x"]), float(spk["y"])))
+			spike.reversed = spike_reversed
 			spike.position = spike_position
 			spike.z_index = 1
 			add_child(spike)

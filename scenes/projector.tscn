@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjwc38uu7ekgi"]
+
+[ext_resource type="Texture2D" uid="uid://cs6gt2whn4nwh" path="res://assets/textures/tilemap.png" id="1_7dggp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_14thd"]
+size = Vector2(14, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_400jq"]
+size = Vector2(4, 2)
+
+[node name="Projector" type="Node2D"]
+
+[node name="Collider" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collider"]
+position = Vector2(0, 5.5)
+shape = SubResource("RectangleShape2D_14thd")
+
+[node name="trigger" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="trigger"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_400jq")
+debug_color = Color(0.988895, 0, 0.296781, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("1_7dggp")
+region_enabled = true
+region_rect = Rect2(96, 96, 16, 16)

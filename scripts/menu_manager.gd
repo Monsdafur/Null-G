@@ -23,14 +23,14 @@ func _on_start_button_button_up() -> void:
 	transition_filter.reverse = true
 	transition_filter.process_mode = Node.PROCESS_MODE_INHERIT
 	transition_filter.visible = true
-	transition_filter.timer.start
+	transition_filter.timer.start()
 
 func _on_quit_button_button_up() -> void:
 	button_type = ButtonType.QUIT
 	transition_filter.reverse = true
 	transition_filter.process_mode = Node.PROCESS_MODE_INHERIT
 	transition_filter.visible = true
-	transition_filter.timer.start
+	transition_filter.timer.start()
 
 func _on_transition_timeout() -> void:
 	match button_type:

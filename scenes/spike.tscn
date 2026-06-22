@@ -1,6 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://d2b2d4msspn3c"]
+[gd_scene load_steps=21 format=3 uid="uid://d2b2d4msspn3c"]
 
-[ext_resource type="Script" path="res://scripts/spike_handler.gd" id="1_3u1lt"]
+[ext_resource type="Script" path="res://scripts/spike.gd" id="1_3u1lt"]
 [ext_resource type="Texture2D" uid="uid://cs6gt2whn4nwh" path="res://assets/textures/tilemap.png" id="1_s6u5y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ltn54"]
@@ -15,9 +15,25 @@ region = Rect2(64, 16, 16, 16)
 atlas = ExtResource("1_s6u5y")
 region = Rect2(80, 16, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tuym"]
+atlas = ExtResource("1_s6u5y")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cah81"]
+atlas = ExtResource("1_s6u5y")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5s48o"]
+atlas = ExtResource("1_s6u5y")
+region = Rect2(80, 32, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_atpsg"]
 atlas = ExtResource("1_s6u5y")
 region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ai12c"]
+atlas = ExtResource("1_s6u5y")
+region = Rect2(48, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rqd3b"]
 atlas = ExtResource("1_s6u5y")
@@ -30,6 +46,18 @@ region = Rect2(64, 16, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_isthu"]
 atlas = ExtResource("1_s6u5y")
 region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dnmy"]
+atlas = ExtResource("1_s6u5y")
+region = Rect2(80, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3d6hd"]
+atlas = ExtResource("1_s6u5y")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gux7t"]
+atlas = ExtResource("1_s6u5y")
+region = Rect2(48, 32, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jhxvp"]
 animations = [{
@@ -49,10 +77,32 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_8tuym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cah81")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5s48o")
+}],
+"loop": false,
+"name": &"activated_inverted",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_atpsg")
 }],
 "loop": true,
 "name": &"dormant",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ai12c")
+}],
+"loop": false,
+"name": &"dormant_inverted",
 "speed": 5.0
 }, {
 "frames": [{
@@ -67,6 +117,20 @@ animations = [{
 }],
 "loop": false,
 "name": &"retract",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2dnmy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3d6hd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gux7t")
+}],
+"loop": false,
+"name": &"retract_inverted",
 "speed": 12.0
 }]
 
@@ -92,22 +156,22 @@ script = ExtResource("1_3u1lt")
 texture_filter = 1
 texture_repeat = 1
 sprite_frames = SubResource("SpriteFrames_jhxvp")
-animation = &"dormant"
+animation = &"activated_inverted"
 autoplay = "dormant"
 
 [node name="Trigger" type="Area2D" parent="."]
+position = Vector2(0, 6)
 collision_mask = 2
 script = SubResource("GDScript_s571e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger"]
-position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_sf0lo")
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 4)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_qxru7")
 debug_color = Color(1, 0, 0, 0.419608)
 
