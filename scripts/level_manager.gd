@@ -110,7 +110,7 @@ func load_level() -> void:
 	player = ins_player.instantiate()
 	player.global_position = to_global(entrance_position)
 	get_parent().add_child.call_deferred(player)
-	var player_animation_manager: Node2D = player.get_node("Node2D")
+	var player_animation_manager: AnimationTree = player.get_node("AnimationTree")
 	player_animation_manager.death.connect(_on_player_death)
 	
 	var ext: Dictionary = json_data["exit"]
