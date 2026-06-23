@@ -10,7 +10,6 @@ extends Node2D
 @onready var transition_effect: ColorRect = $"../CanvasLayer/ColorRect"
 
 var ins_pressure_pad: Resource =  preload("res://scenes/pressure_pad.tscn")
-var ins_reverse_pressure_pad: Resource =  preload("res://scenes/pressure_pad_reverse.tscn")
 var ins_platform: Resource = preload("res://scenes/platform.tscn")
 var ins_spike: Resource = preload("res://scenes/spike.tscn")
 var ins_player: Resource = preload("res://scenes/player.tscn")
@@ -27,16 +26,18 @@ func convert_position(grid_position: Vector2):
 	return grid_position * 16.0 + Vector2(8.0, 8.0)
 
 func load_pressure_pad(cell: Dictionary) -> void:
-	var reverse: bool
+	var reversed: bool
 	if int(cell["gid"]) == 32:
-		reverse = false
+		reversed = false
 	elif int(cell["gid"]) == 25: 
-		reverse = true
+		reversed = true
 	else:
 		return
-	var pressure_pad: Area2D = ins_pressure_pad.instantiate() if not reverse else ins_reverse_pressure_pad.instantiate()
+	var pressure_pad: Area2D = ins_pressure_pad.instantiate()
 	var pad_position: Vector2 = Vector2(float(cell["x"]), float(cell["y"]))
-	pad_position += Vector2(0.0, 1.0) if reverse else Vector2(0.0, -1.0)
+	pad_position += Vector2(0.0, 1.0) if reversed else Vector2(0.0, -1.0)
+	pressure_pad.reversed = reversed
+	pressure_pad.gravity_scale = 1 if reversed else -1
 	pressure_pad.position = convert_position(pad_position)
 	pressure_pad.z_index = 2
 	add_child(pressure_pad)
