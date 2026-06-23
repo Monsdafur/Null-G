@@ -25,4 +25,4 @@ position = Vector2(-240, -160)
 max_level = 2
 atlas_width = 8
 
-[node name="CanvasLayer" parent="." instance=ExtResource("2_nfqtn")]
+[node name="TransitionFilter" parent="Level" instance=ExtResource("2_nfqtn")]

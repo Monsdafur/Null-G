@@ -6,7 +6,7 @@ extends Node2D
 @onready var level_layer: TileMapLayer = $LevelLayer
 @onready var background_layer: TileMapLayer = $Background
 @onready var player_spawn_timer: Timer = $PlayerSpawnDelay
-@onready var transition_effect: ColorRect = $"../CanvasLayer/ColorRect"
+@onready var transition_filter: CanvasLayer = $"TransitionFilter"
 
 var ins_pressure_pad: Resource =  preload("res://scenes/pressure_pad.tscn")
 var ins_platform: Resource = preload("res://scenes/platform.tscn")
@@ -18,6 +18,7 @@ var exit_reversed: bool = false
 var entrance: Node2D
 var exit: Node2D
 var player: CharacterBody2D
+var start_game: bool = false
 
 var platforms: Array[AnimatableBody2D] = []
 var spikes: Array[Node2D] = []
@@ -134,13 +135,24 @@ func load_level() -> void:
 	exit.win.connect(_on_player_win)
 	game_manager.gravity_scale = 1 if not entrance.reversed else -1
 	
+func spanw_player() -> void:
 	player = ins_player.instantiate()
-	player.position = entrance.position + Vector2(1.0, 5.0)
 	player.get_node("AnimationTree").death.connect(_on_player_death)
+	player.get_node("Sprite2D").flip_v = entrance.reversed
+	var offset: Vector2 = Vector2(1.0, -5.0) if not entrance.reversed else Vector2(0.0, 5.0)
+	player.position = entrance.position + offset
+	player_spawn_timer.start()
+	await player_spawn_timer.timeout
 	add_child(player)
+	player.get_node("Sprite2D").visible = true
+	player.get_node("Sprite2D").region_enabled = false
 	
+
 func _ready() -> void:
+	transition_filter.timer.start()
 	load_level()
+	spanw_player()
+	start_game = true
 
 func _on_player_win() -> void:
 	level += 1
@@ -153,21 +165,23 @@ func _on_player_win() -> void:
 	await player_animation_tree.animation_finished
 	player.queue_free()
 	await get_tree().process_frame
-	transition_effect.reverse = true;
-	transition_effect.timer.start();
-	await transition_effect.timer.timeout
+	transition_filter.reverse = true;
+	transition_filter.timer.start();
+	await transition_filter.timer.timeout
 	load_level()
-	transition_effect.reverse = false;
-	transition_effect.timer.start();
+	transition_filter.reverse = false;
+	transition_filter.timer.start();
+	await transition_filter.timer.timeout
+	spanw_player()
 	
 func _on_player_death() -> void:
-	player_spawn_timer.start()
-	await player_spawn_timer.timeout
 	player.queue_free()
 	await get_tree().process_frame
-	transition_effect.reverse = true;
-	transition_effect.timer.start();
-	await transition_effect.timer.timeout
+	transition_filter.reverse = true;
+	transition_filter.timer.start();
+	await transition_filter.timer.timeout
 	load_level()
-	transition_effect.reverse = false;
-	transition_effect.timer.start();
+	transition_filter.reverse = false;
+	transition_filter.timer.start();
+	await transition_filter.timer.timeout
+	spanw_player()

@@ -7,7 +7,8 @@
 shader = ExtResource("1_k1n7i")
 shader_parameter/dt = null
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="TransitionFilter" type="CanvasLayer"]
+script = ExtResource("2_x0c3t")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_vcmls")
@@ -16,8 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_x0c3t")
 
-[node name="Timer" type="Timer" parent="ColorRect"]
-wait_time = 0.2
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
