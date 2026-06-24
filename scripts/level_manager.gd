@@ -6,9 +6,10 @@ extends Node2D
 @onready var level_layer: TileMapLayer = $LevelLayer
 @onready var background_layer: TileMapLayer = $Background
 @onready var player_spawn_timer: Timer = $PlayerSpawnDelay
-@onready var transition_filter: CanvasLayer = $"TransitionFilter"
+@onready var transition_filter: CanvasLayer = $TransitionFilter
+@onready var glitch_filter: CanvasLayer = $GlitchFilter
 
-var ins_pressure_pad: Resource =  preload("res://scenes/pressure_pad.tscn")
+var ins_pressure_pad: Resource = preload("res://scenes/pressure_pad.tscn")
 var ins_platform: Resource = preload("res://scenes/platform.tscn")
 var ins_spike: Resource = preload("res://scenes/spike.tscn")
 var ins_player: Resource = preload("res://scenes/player.tscn")
@@ -30,9 +31,9 @@ func convert_position(grid_position: Vector2):
 
 func load_pressure_pad(cell: Dictionary) -> void:
 	var reversed: bool
-	if int(cell["gid"]) == 32:
+	if int(cell["gid"]) == 43:
 		reversed = false
-	elif int(cell["gid"]) == 25: 
+	elif int(cell["gid"]) == 44:
 		reversed = true
 	else:
 		return
@@ -57,9 +58,9 @@ func load_objects(object_data: Array) -> void:
 	for obj in object_data:
 		var object_position: Vector2 = convert_position(Vector2(float(obj["x"]), float(obj["y"])))
 		var id: int = int(obj["gid"])
-		if id == 11 or id == 19:
+		if id == 56 or id == 59:
 			var spike: Node2D = ins_spike.instantiate()
-			spike.reversed = id == 19
+			spike.reversed = id == 59
 			spike.position = object_position
 			spike.z_index = 1
 			add_child(spike)
@@ -70,10 +71,10 @@ func load_projectors(projector_data: Array) -> void:
 		var projector_position: Vector2 = convert_position(Vector2(float(prj["x"]), float(prj["y"])))
 		var projector: Node2D = ins_projector.instantiate()
 		match String(prj["type"]):
-			"entrance": 
+			"entrance":
 				projector.type = Projector.Type.ENTRANCE
 				entrance = projector
-			"exit": 
+			"exit":
 				projector.type = Projector.Type.EXIT
 				exit = projector
 		projector.position = projector_position
@@ -128,12 +129,14 @@ func load_level() -> void:
 			add_child(platform)
 			platforms.append(platform)
 	
-	load_objects(json_data["objects"])
-	load_projectors(json_data["projector"])
-	assert(entrance.type == Projector.Type.ENTRANCE)
-	assert(exit.type == Projector.Type.EXIT)
-	exit.win.connect(_on_player_win)
-	game_manager.gravity_scale = 1 if not entrance.reversed else -1
+	if json_data.has("object"):
+		load_objects(json_data["object"])
+	if json_data.has("projector"):
+		load_projectors(json_data["projector"])
+		assert(entrance.type == Projector.Type.ENTRANCE)
+		assert(exit.type == Projector.Type.EXIT)
+		exit.win.connect(_on_player_win)
+		game_manager.gravity_scale = 1 if not entrance.reversed else -1
 	
 func spanw_player() -> void:
 	player = ins_player.instantiate()
@@ -171,17 +174,23 @@ func _on_player_win() -> void:
 	load_level()
 	transition_filter.reverse = false;
 	transition_filter.timer.start();
+	glitch_filter.timer.start()
+	glitch_filter.stop = false
 	await transition_filter.timer.timeout
 	spanw_player()
 	
 func _on_player_death() -> void:
 	player.queue_free()
 	await get_tree().process_frame
+	player_spawn_timer.start()
+	await player_spawn_timer.timeout
 	transition_filter.reverse = true;
 	transition_filter.timer.start();
 	await transition_filter.timer.timeout
 	load_level()
 	transition_filter.reverse = false;
 	transition_filter.timer.start();
+	glitch_filter.timer.start()
+	glitch_filter.stop = false
 	await transition_filter.timer.timeout
 	spanw_player()

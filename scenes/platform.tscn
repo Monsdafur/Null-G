@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cgx235qaelkt8"]
 
-[ext_resource type="Texture2D" uid="uid://cs6gt2whn4nwh" path="res://assets/textures/tilemap.png" id="1_i4n8s"]
 [ext_resource type="Script" path="res://scripts/ping_pong.gd" id="1_pbqvv"]
+[ext_resource type="Texture2D" uid="uid://do0pqqgxcf665" path="res://assets/textures/tilemap_t.png" id="2_7axfh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bn2lj"]
 size = Vector2(48, 16)
@@ -12,9 +12,9 @@ script = ExtResource("1_pbqvv")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture_repeat = 1
-texture = ExtResource("1_i4n8s")
+texture = ExtResource("2_7axfh")
 region_enabled = true
-region_rect = Rect2(64, 0, 48, 16)
+region_rect = Rect2(0, 80, 48, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_bn2lj")

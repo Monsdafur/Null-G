@@ -19,7 +19,7 @@ enum Type {
 signal win
 
 func _ready() -> void:
-	sprite.region_rect = Rect2i(96, 96, 16, 16) if not reversed else Rect2i(112, 96, 16, 16)
+	sprite.region_rect = Rect2i(64, 128, 16, 16) if not reversed else Rect2i(80, 128, 16, 16)
 	collider.position = Vector2(0.0, 5.5) if not reversed else Vector2(0.0, -5.5)
 	trigger.position = Vector2(0.0, 2.0) if not reversed else Vector2(0.0, -2.0)
 

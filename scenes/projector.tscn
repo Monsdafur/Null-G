@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cjwc38uu7ekgi"]
 
-[ext_resource type="Texture2D" uid="uid://cs6gt2whn4nwh" path="res://assets/textures/tilemap.png" id="1_7dggp"]
 [ext_resource type="Script" path="res://scripts/projector.gd" id="1_rjqua"]
+[ext_resource type="Texture2D" uid="uid://do0pqqgxcf665" path="res://assets/textures/tilemap_t.png" id="2_8a870"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_14thd"]
 size = Vector2(14, 5)
@@ -29,8 +29,8 @@ debug_color = Color(0.988895, 0, 0.296781, 0.42)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture_repeat = 1
-texture = ExtResource("1_7dggp")
+texture = ExtResource("2_8a870")
 region_enabled = true
-region_rect = Rect2(96, 96, 16, 16)
+region_rect = Rect2(64, 128, 16, 16)
 
 [connection signal="body_entered" from="Trigger" to="." method="_on_trigger_body_entered"]

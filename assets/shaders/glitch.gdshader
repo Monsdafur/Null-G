@@ -1,15 +1,19 @@
 shader_type canvas_item;
 
 uniform sampler2D screen : hint_screen_texture, repeat_enable, filter_nearest;
+uniform float scale;
+uniform float time;
 
-float random(float p) {
-    p = fract(p * 0.011); 
-    p *= p + 7.5; p *= p + p; 
-    return fract(p); 
+float random(float x) {
+    return (
+        sin(x) +
+        0.4 * sin(3.0 * x) +
+        0.2 * sin(5.0 * x)
+    ) / 1.6;
 }
 
-const float offset = 0.05;
-const float cutoffs[11] = {
+const float offset = 0.015;
+const float bands[11] = {
 	0.0, 
     0.115, 
     0.287, 
@@ -22,17 +26,19 @@ const float cutoffs[11] = {
     0.893, 
     0.957
 };
+const vec2 aberation = vec2(1.0 / 240.0, 1.0 / 160.0);
 
 void fragment() {
-	float rand = random(float(int(floor(TIME * 10.0)) % 100));
-	int range = int(floor(rand * 17.0));
-	rand = (rand - 0.5) * 2.0;
+	float rand = random(float(int(floor(time * 8.0)) % 100));
+	float rand01 = (rand + 1.0) / 2.0;
+	int range = int(round(rand01 * 17.0));
 	vec2 offset_uv = vec2(0.0, 0.0);
-	if (SCREEN_UV.y > cutoffs[range] && SCREEN_UV.y < cutoffs[range + 1]) {
-		offset_uv.x = rand * offset;
+	if (SCREEN_UV.y > bands[range] && SCREEN_UV.y < bands[range + 1]) {
+		offset_uv.x = rand * offset * scale;
 	}
+	float r = texture(screen, SCREEN_UV + offset_uv + aberation * floor(rand01 * 1.25) * scale).r;
+	float g = texture(screen, SCREEN_UV + offset_uv).g;
+	float b = texture(screen, SCREEN_UV + offset_uv - aberation * floor(rand01 * 1.25) * scale).b;
 	
-	vec3 color = texture(screen, SCREEN_UV + offset_uv).rgb;
-	
-	COLOR.rgb = color;
+	COLOR.rgb = vec3(r, g, b);
 }

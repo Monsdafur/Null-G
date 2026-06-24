@@ -25,7 +25,7 @@ func _ready() -> void:
 	state = State.DORMANT
 	area.process_mode = Node.PROCESS_MODE_DISABLED
 	trigger.position.y = 6.0 if not reversed else -6.0
-	area.position.y = 4.0 if not reversed else -4.0
+	area.position.y = 2.0 if not reversed else -2.0
 	dormant_animation = "dormant" if not reversed else "dormant_inverted"
 	activated_animation = "activated" if not reversed else "activated_inverted"
 	retract_animation = "retract" if not reversed else "retract_inverted"

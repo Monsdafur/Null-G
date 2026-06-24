@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b55hecd78ydso"]
 
 [ext_resource type="Script" path="res://scripts/pressure_pad.gd" id="1_1wfjm"]
-[ext_resource type="Texture2D" uid="uid://cs6gt2whn4nwh" path="res://assets/textures/tilemap.png" id="1_pdhna"]
+[ext_resource type="Texture2D" uid="uid://do0pqqgxcf665" path="res://assets/textures/tilemap_t.png" id="2_8wdnh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hvst4"]
 size = Vector2(12, 2)
@@ -18,9 +18,9 @@ position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_hvst4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_pdhna")
+texture = ExtResource("2_8wdnh")
 region_enabled = true
-region_rect = Rect2(0, 48, 16, 16)
+region_rect = Rect2(0, 128, 16, 16)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

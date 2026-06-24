@@ -10,8 +10,8 @@ var normal: Rect2i
 var triggered: Rect2i
 
 func _ready() -> void:
-	normal = Rect2i(Vector2i(0, 3) * 16, Vector2i(16, 16)) if not reversed else Rect2i(Vector2i(1, 4) * 16, Vector2i(16, 16))
-	triggered = Rect2i(Vector2i(2, 3) * 16, Vector2i(16, 16)) if not reversed else Rect2i(Vector2i(3, 3) * 16, Vector2i(16, 16))
+	normal = Rect2i(Vector2i(0, 8) * 16, Vector2i(16, 16)) if not reversed else Rect2i(Vector2i(2, 8) * 16, Vector2i(16, 16))
+	triggered = Rect2i(Vector2i(1, 8) * 16, Vector2i(16, 16)) if not reversed else Rect2i(Vector2i(3, 8) * 16, Vector2i(16, 16))
 	sprite.region_rect = normal
 	shape.position = Vector2(0.0, 7.0) if not reversed else Vector2(0.0, -7.0)
 	
