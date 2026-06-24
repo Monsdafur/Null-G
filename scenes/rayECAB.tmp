@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://vxd18ckvhj6y"]
+
+[ext_resource type="Script" path="res://scripts/ray_emitter.gd" id="1_keesk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_etady"]
+
+[node name="RayEmitter" type="Node2D"]
+script = ExtResource("1_keesk")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+hit_from_inside = true
+
+[node name="Trigger" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger"]
+shape = SubResource("RectangleShape2D_etady")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[connection signal="body_entered" from="Trigger" to="." method="_on_trigger_body_entered"]

@@ -14,6 +14,7 @@ var ins_platform: Resource = preload("res://scenes/platform.tscn")
 var ins_spike: Resource = preload("res://scenes/spike.tscn")
 var ins_player: Resource = preload("res://scenes/player.tscn")
 var ins_projector: Resource = preload("res://scenes/projector.tscn")
+var ins_emitter: Resource = preload("res://scenes/ray_emitter.tscn")
 
 var exit_reversed: bool = false
 var entrance: Node2D
@@ -25,6 +26,7 @@ var platforms: Array[AnimatableBody2D] = []
 var spikes: Array[Node2D] = []
 var projectors: Array[Node2D] = []
 var pressure_pads: Array[Area2D] = []
+var emitters: Array[Node2D] = []
 
 func convert_position(grid_position: Vector2):
 	return grid_position * 16.0 + Vector2(8.0, 8.0)
@@ -46,13 +48,34 @@ func load_pressure_pad(cell: Dictionary) -> void:
 	pressure_pad.z_index = 2
 	add_child(pressure_pad)
 	pressure_pads.append(pressure_pad)
-
+	
+func load_ray_emitter(cell: Dictionary) -> void:
+	var direction: RayEmitter.Direction
+	if int(cell["gid"]) == 48:
+		direction = RayEmitter.Direction.RIGHT
+	elif int(cell["gid"]) == 49:
+		direction = RayEmitter.Direction.DOWN
+	elif int(cell["gid"]) == 50:
+		direction = RayEmitter.Direction.UP
+	elif int(cell["gid"]) == 51:
+		direction = RayEmitter.Direction.LEFT
+	else:
+		return;
+	
+	var emitter: Node2D = ins_emitter.instantiate()
+	var emitter_position: Vector2 = Vector2(float(cell["x"]), float(cell["y"]))
+	emitter.direction = direction
+	emitter.position = convert_position(emitter_position)
+	add_child(emitter)
+	emitters.append(emitter)
+	
 func load_tilemap(tilemap: TileMapLayer, key: String, json_data: Dictionary) -> void:
 	for cell in json_data[key]:
 		var tile_position: Vector2i = Vector2i(cell["x"], cell["y"])
 		var atlas_position: Vector2i = Vector2i(int(cell["gid"]) % atlas_width, int(cell["gid"]) / atlas_width);
 		tilemap.set_cell(tile_position, 0, atlas_position)
 		load_pressure_pad(cell)
+		load_ray_emitter(cell)
 		
 func load_objects(object_data: Array) -> void:
 	for obj in object_data:
@@ -96,6 +119,9 @@ func clear_level() -> void:
 	for projector in projectors:
 		projector.queue_free()
 	projectors.clear()
+	for emitter in emitters:
+		emitter.queue_free()
+	emitters.clear()
 	level_layer.clear()
 	background_layer.clear()
 	
