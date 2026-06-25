@@ -24,6 +24,6 @@ func _ready() -> void:
 	trigger.position = Vector2(0.0, 2.0) if not reversed else Vector2(0.0, -2.0)
 
 func _on_trigger_body_entered(_body: Node2D) -> void:
-	if (game_manager.gravity_scale < 0.0 and reversed) or (game_manager.gravity_scale > 0.0 and not reversed):
+	if (global.gravity_scale < 0.0 and reversed) or (global.gravity_scale > 0.0 and not reversed):
 		if (type == Type.EXIT):
 			win.emit()

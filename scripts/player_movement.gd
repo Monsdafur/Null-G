@@ -7,12 +7,12 @@ var direction: float
 var allow_move: bool = false
 
 func _physics_process(delta: float) -> void:
-	up_direction = Vector2(0, -1) if game_manager.gravity_scale == 1 else Vector2(0, 1)
+	up_direction = Vector2(0, -1) if global.gravity_scale == 1 else Vector2(0, 1)
 	
 	if not is_on_floor():
-		velocity += get_gravity() * game_manager.gravity_scale * delta
+		velocity += get_gravity() * global.gravity_scale * delta
 	elif Input.is_action_just_pressed("ui_up") and allow_move:
-		velocity.y = jump_velocity * game_manager.gravity_scale
+		velocity.y = jump_velocity * global.gravity_scale
 	
 	direction = Input.get_axis("ui_left", "ui_right") if allow_move else 0.0
 	

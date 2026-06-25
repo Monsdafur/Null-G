@@ -17,12 +17,12 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-game_manager="*res://scripts/game_manager.gd"
+global="*res://scripts/global.gd"
 
 [display]
 
-window/size/viewport_width=960
-window/size/viewport_height=640
+window/size/viewport_width=1600
+window/size/viewport_height=896
 
 [dotnet]
 

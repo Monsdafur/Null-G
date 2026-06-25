@@ -61,4 +61,4 @@ func _process(_delta: float) -> void:
 		segment.scale = Vector2(length / 16.0, 1.0)
 
 func _on_trigger_body_entered(_body: Node2D) -> void:
-	game_manager.game_over.emit()
+	global.game_over.emit()

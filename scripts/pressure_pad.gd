@@ -18,7 +18,7 @@ func _ready() -> void:
 
 func _on_body_entered(_body: Node2D) -> void:
 	sprite.region_rect = triggered
-	game_manager.gravity_scale = gravity_scale
+	global.gravity_scale = gravity_scale
 
 func _on_body_exited(_body: Node2D) -> void:
 	sprite.region_rect = normal

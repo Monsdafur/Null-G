@@ -1,21 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdts5utildbrv"]
+[gd_scene load_steps=2 format=3 uid="uid://bdts5utildbrv"]
 
-[ext_resource type="Script" path="res://scripts/level_manager.gd" id="1_fl2ss"]
-[ext_resource type="TileSet" uid="uid://dpov5s3u51fti" path="res://assets/tileset/level.tres" id="2_7l7si"]
+[ext_resource type="Script" path="res://scripts/level_loader.gd" id="1_fl2ss"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_fl2ss")
-
-[node name="LevelLayer" type="TileMapLayer" parent="."]
-texture_filter = 1
-texture_repeat = 1
-tile_set = ExtResource("2_7l7si")
-
-[node name="Background" type="TileMapLayer" parent="."]
-z_index = -1
-texture_filter = 1
-texture_repeat = 1
-tile_set = ExtResource("2_7l7si")
 
 [node name="PlayerSpawnDelay" type="Timer" parent="."]
 one_shot = true

@@ -26,7 +26,7 @@ const float bands[11] = {
     0.893, 
     0.957
 };
-const vec2 aberation = vec2(1.0 / 240.0, 1.0 / 160.0);
+const vec2 aberation = vec2(1.0 / 800.0, 1.0 / 448.0);
 
 void fragment() {
 	float rand = random(float(int(floor(time * 8.0)) % 100));

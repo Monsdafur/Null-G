@@ -19,13 +19,11 @@ func _ready() -> void:
 	transition_filter.timer.start()
 
 func _on_start_button_button_up() -> void:
-	print("START")
 	button_type = ButtonType.START
 	transition_filter.reverse = true
 	transition_filter.timer.start()
 
 func _on_quit_button_button_up() -> void:
-	print("QUIT")
 	button_type = ButtonType.QUIT
 	transition_filter.reverse = true
 	transition_filter.timer.start()

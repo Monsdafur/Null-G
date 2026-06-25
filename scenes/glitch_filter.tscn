@@ -14,8 +14,8 @@ script = ExtResource("1_hcwia")
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 11
 material = SubResource("ShaderMaterial_73sos")
-offset_right = 960.0
-offset_bottom = 640.0
+offset_right = 1600.0
+offset_bottom = 896.0
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
