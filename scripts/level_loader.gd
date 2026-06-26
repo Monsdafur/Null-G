@@ -90,17 +90,6 @@ func load_emitter(tile_position: Vector2i, gid: int) -> void:
 	emitter.direction = direction
 	add_child(emitter)
 	emitters.append(emitter)
-	
-func load_pressure_pad(tile_position: Vector2i, reversed: bool) -> void:
-	var pressure_pad: Area2D = ins_pressure_pad.instantiate()
-	var pad_position: Vector2 = Vector2i(tile_position) * 16.0 + Vector2(8.0, 8.0)
-	pad_position += Vector2(0.0, 16.0) if reversed else Vector2(0.0, -16.0)
-	pressure_pad.reversed = reversed
-	pressure_pad.gravity_scale = 1 if reversed else -1
-	pressure_pad.position = pad_position
-	pressure_pad.z_index = 2
-	add_child(pressure_pad)
-	pressure_pads.append(pressure_pad)
 			
 func load_tilemap_layer(data: Dictionary, order: int) -> void:
 	var tilemap_data = data["data"]
@@ -120,9 +109,6 @@ func load_tilemap_layer(data: Dictionary, order: int) -> void:
 			load_spike(tile_position, gid == 59)
 		elif gid == 70:
 			load_box(tile_position)
-		elif gid == 43 or gid == 44:
-			load_pressure_pad(tile_position, gid == 44)
-			layer.set_cell(tile_position, 0, atlas_position)
 		elif gid == 48 or gid == 49 or gid == 50 or gid == 51:
 			load_emitter(tile_position, gid)
 			layer.set_cell(tile_position, 0, atlas_position)
@@ -170,6 +156,23 @@ func load_platform(data: Dictionary) -> void:
 	add_child(platform)
 	platforms.append(platform)
 	
+func load_pressure_pad(data: Dictionary) -> void:
+	var reversed = data["gid"] == 67
+	var pad_type: String = data["properties"][0]["value"]
+	var pressure_pad: Area2D = ins_pressure_pad.instantiate()
+	var pad_position: Vector2 = Vector2(float(data["x"]), float(data["y"])) + Vector2(8.0, -8.0)
+	pressure_pad.reversed = reversed
+	pressure_pad.position = pad_position
+	pressure_pad.z_index = 2
+	
+	match pad_type:
+		"gravity pad":
+			var gravity: int = data["properties"][1]["value"]
+			pressure_pad.function = global.set_gravity_scale.bind(gravity)
+			
+	add_child(pressure_pad)
+	pressure_pads.append(pressure_pad)
+	
 func load_objects(data: Dictionary) -> void:
 	var objects_data: Array = data["objects"]
 	for object: Dictionary in objects_data:
@@ -178,6 +181,8 @@ func load_objects(data: Dictionary) -> void:
 				load_projector(object)
 			"platform":
 				load_platform(object)
+			"pressure pad":
+				load_pressure_pad(object)
 
 func spawn_player() -> void:
 	if not has_entrance:

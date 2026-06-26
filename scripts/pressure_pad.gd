@@ -1,7 +1,7 @@
 extends Area2D
 
-@export var gravity_scale: int
 @export var reversed: bool
+@export var function: Callable
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var shape: CollisionShape2D = $CollisionShape2D
@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func _on_body_entered(_body: Node2D) -> void:
 	sprite.visible = false
-	global.gravity_scale = gravity_scale
+	function.call()
 
 func _on_body_exited(_body: Node2D) -> void:
 	sprite.visible = true

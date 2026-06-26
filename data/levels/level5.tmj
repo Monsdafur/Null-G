@@ -109,6 +109,52 @@
                  "width":16,
                  "x":336,
                  "y":240
+                }, 
+                {
+                 "gid":65,
+                 "height":16,
+                 "id":5,
+                 "name":"pressure pad",
+                 "properties":[
+                        {
+                         "name":"0_type",
+                         "type":"string",
+                         "value":"gravity pad"
+                        }, 
+                        {
+                         "name":"gravity",
+                         "type":"int",
+                         "value":-1
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":448,
+                 "y":256
+                }, 
+                {
+                 "gid":67,
+                 "height":16,
+                 "id":6,
+                 "name":"pressure pad",
+                 "properties":[
+                        {
+                         "name":"0_type",
+                         "type":"string",
+                         "value":"gravity pad"
+                        }, 
+                        {
+                         "name":"gravity",
+                         "type":"int",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":352,
+                 "y":240
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -156,7 +202,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":5,
+ "nextobjectid":7,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
