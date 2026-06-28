@@ -14,16 +14,16 @@ float random(float x) {
 
 const float offset = 0.015;
 const float bands[11] = {
-	0.0, 
-    0.115, 
-    0.287, 
-    0.391, 
-    0.442, 
-    0.518, 
-    0.639, 
-    0.721, 
-    0.804, 
-    0.893, 
+	0.0,
+    0.115,
+    0.287,
+    0.391,
+    0.442,
+    0.518,
+    0.639,
+    0.721,
+    0.804,
+    0.893,
     0.957
 };
 const vec2 aberation = vec2(1.0 / 400.0, 1.0 / 224.0);
@@ -39,6 +39,6 @@ void fragment() {
 	float r = texture(screen, SCREEN_UV + offset_uv + aberation * floor(rand01 * 1.25) * scale).r;
 	float g = texture(screen, SCREEN_UV + offset_uv).g;
 	float b = texture(screen, SCREEN_UV + offset_uv - aberation * floor(rand01 * 1.25) * scale).b;
-	
+
 	COLOR.rgb = vec3(r, g, b);
 }

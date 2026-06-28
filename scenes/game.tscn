@@ -11,7 +11,7 @@ zoom = Vector2(2, 2)
 
 [node name="Level" parent="." instance=ExtResource("3_rgulm")]
 position = Vector2(-400, -224)
-level = 2
+level = 3
 max_level = 6
 atlas_width = 8
 

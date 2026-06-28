@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://do0pqqgxcf665" path="res://assets/textures/tilemap.png" id="2_8a870"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_14thd"]
-size = Vector2(14, 5)
+size = Vector2(14, 9)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_400jq"]
 size = Vector2(4, 2)
@@ -13,13 +13,13 @@ size = Vector2(4, 2)
 script = ExtResource("1_rjqua")
 
 [node name="Collider" type="StaticBody2D" parent="."]
-position = Vector2(0, 5.5)
+position = Vector2(0, 3.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collider"]
 shape = SubResource("RectangleShape2D_14thd")
 
 [node name="Trigger" type="Area2D" parent="."]
-position = Vector2(0, 2)
+position = Vector2(0, -2)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger"]
