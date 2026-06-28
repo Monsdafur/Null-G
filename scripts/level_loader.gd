@@ -13,7 +13,7 @@ var ins_pressure_pad: Resource = preload("res://scenes/pressure_pad.tscn")
 var ins_platform: Resource = preload("res://scenes/platform.tscn")
 var ins_spike: Resource = preload("res://scenes/spike.tscn")
 var ins_player: Resource = preload("res://scenes/player.tscn")
-var ins_projector: Resource = preload("res://scenes/projector.tscn")
+var ins_pipe: Resource = preload("res://scenes/pipe.tscn")
 var ins_emitter: Resource = preload("res://scenes/ray_emitter.tscn")
 var ins_box: Resource = preload("res://scenes/box.tscn")
 
@@ -21,7 +21,7 @@ var map_data: Dictionary
 var map_width: int
 var has_entrance: bool = false
 var tilemap_layers: Array[TileMapLayer]
-var projectors: Array[Node2D]
+var pipes: Array[Node2D]
 var spikes: Dictionary
 var platforms: Dictionary
 var emitters: Array[Node2D]
@@ -108,27 +108,27 @@ func load_tilemap_layer(data: Dictionary, order: int) -> void:
 	add_child(layer)
 	tilemap_layers.append(layer)
 	
-func load_projector(data: Dictionary) -> void:
+func load_pipe(data: Dictionary) -> void:
 	var reversed = data["gid"] == 70
 	var type: Dictionary = data["properties"][0]
-	var projector: Node2D = ins_projector.instantiate()
-	var projector_position = Vector2(float(data["x"]), float(data["y"])) + Vector2(8.0, -8.0)
+	var pipe: Node2D = ins_pipe.instantiate()
+	var pipe_position = Vector2(float(data["x"]), float(data["y"])) + Vector2(8.0, -8.0)
 	match type["value"]:
 		"entrance":
 			if has_entrance:
 				print("Cant have more than 1 entrance, skipping")
 				return
-			player_spawn_point = projector_position
+			player_spawn_point = pipe_position
 			player_spawn_point += Vector2(1.0, -5.0) if not reversed else Vector2(1.0, 5.0)
 			has_entrance = true
 			global.gravity_scale = 1 if not reversed else -1
-			projector.type = Projector.Type.ENTRANCE
+			pipe.type = pipe.Type.ENTRANCE
 		"exit":
-			projector.type = Projector.Type.EXIT
-	projector.reversed = reversed
-	projector.position = projector_position
-	add_child(projector)
-	projectors.append(projector)
+			pipe.type = pipe.Type.EXIT
+	pipe.reversed = reversed
+	pipe.position = pipe_position
+	add_child(pipe)
+	pipes.append(pipe)
 	
 func load_platform(data: Dictionary) -> void:
 	var id: int = data["id"]
@@ -155,12 +155,13 @@ func load_platform(data: Dictionary) -> void:
 	
 func load_spike(data: Dictionary) -> void:
 	var id: int = data["id"]
-	print("Spike id: %d" % id)
 	var reversed = data["gid"] == 60
+	var activated: bool = bool(data["properties"][0]["value"])
 	var p0: Vector2 = Vector2(float(data["x"]), float(data["y"])) + Vector2(8.0, -8.0)
 	
 	var spike: Node2D = ins_spike.instantiate()
 	spike.reversed = reversed
+	spike.activated = activated
 	spike.position = p0
 	spike.z_index = 1
 	add_child(spike)
@@ -196,14 +197,14 @@ func load_pressure_pad(data: Dictionary) -> void:
 	
 func load_objects(data: Dictionary) -> void:
 	var objects_data: Array = data["objects"]
-	var projectors_data: Array[Dictionary]
+	var pipes_data: Array[Dictionary]
 	var platforms_data: Array[Dictionary]
 	var spikes_data: Array[Dictionary]
 	var pressure_pads_data: Array[Dictionary]
 	for object: Dictionary in objects_data:
 		match object["name"]:
-			"projector":
-				projectors_data.append(object)
+			"pipe":
+				pipes_data.append(object)
 			"platform":
 				platforms_data.append(object)
 			"spike":
@@ -211,8 +212,8 @@ func load_objects(data: Dictionary) -> void:
 			"pressure pad":
 				pressure_pads_data.append(object)
 				
-	for object: Dictionary in projectors_data:
-		load_projector(object)
+	for object: Dictionary in pipes_data:
+		load_pipe(object)
 	for object: Dictionary in platforms_data:
 		load_platform(object)
 	for object: Dictionary in spikes_data:
@@ -236,9 +237,9 @@ func clear_level() -> void:
 	for tilemap_layer: TileMapLayer in tilemap_layers:
 		tilemap_layer.queue_free()
 	tilemap_layers.clear()
-	for projector: Node2D in projectors:
-		projector.queue_free()
-	projectors.clear()
+	for pipe: Node2D in pipes:
+		pipe.queue_free()
+	pipes.clear()
 	for key: int in spikes:
 		spikes[key].queue_free()
 	spikes.clear()

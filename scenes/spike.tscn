@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://d2b2d4msspn3c"]
+[gd_scene load_steps=22 format=3 uid="uid://d2b2d4msspn3c"]
 
 [ext_resource type="Script" path="res://scripts/spike.gd" id="1_3u1lt"]
 [ext_resource type="Texture2D" uid="uid://do0pqqgxcf665" path="res://assets/textures/tilemap.png" id="2_0ns8m"]
+[ext_resource type="AudioStream" uid="uid://bq6n4nbtkqnqw" path="res://assets/audio/spike.wav" id="3_jnjcs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a0snc"]
 atlas = ExtResource("2_0ns8m")
@@ -159,7 +160,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxru7"]
-size = Vector2(16, 12)
+size = Vector2(16, 6)
 
 [node name="Spike" type="Node2D"]
 script = ExtResource("1_3u1lt")
@@ -168,11 +169,13 @@ script = ExtResource("1_3u1lt")
 texture_filter = 1
 texture_repeat = 1
 sprite_frames = SubResource("SpriteFrames_jhxvp")
-animation = &"idle_inverted"
+animation = &"activated"
 autoplay = "dormant"
+frame = 2
+frame_progress = 1.0
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(0, 2)
+position = Vector2(0, 5)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -182,6 +185,9 @@ debug_color = Color(1, 0, 0, 0.419608)
 [node name="WaitTimer" type="Timer" parent="."]
 wait_time = 0.25
 one_shot = true
+
+[node name="ActivateSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jnjcs")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

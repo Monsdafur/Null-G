@@ -1,10 +1,12 @@
-[gd_scene load_steps=55 format=3 uid="uid://07ib3xnjhokk"]
+[gd_scene load_steps=57 format=3 uid="uid://07ib3xnjhokk"]
 
 [ext_resource type="Texture2D" uid="uid://beaks68crmjjp" path="res://assets/textures/player.png" id="1_aaqob"]
 [ext_resource type="Script" path="res://scripts/player_movement.gd" id="1_wgk0q"]
 [ext_resource type="Script" path="res://scripts/player_animation_handler.gd" id="3_mxo7y"]
 [ext_resource type="AudioStream" uid="uid://d2xwb7ekys3dx" path="res://assets/audio/jump.wav" id="4_ffwgi"]
 [ext_resource type="AudioStream" uid="uid://bvrpv5foppt4s" path="res://assets/audio/walk.wav" id="5_x6qf3"]
+[ext_resource type="AudioStream" uid="uid://cikr567typgkr" path="res://assets/audio/death.wav" id="6_u1o1e"]
+[ext_resource type="AudioStream" uid="uid://xqnax3rga56a" path="res://assets/audio/spawn.wav" id="7_1wjt0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bfk5"]
 size = Vector2(9, 14)
@@ -356,6 +358,20 @@ tracks/1/keys = {
 "method": &"set_allow_move"
 }]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpawnSound")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tt03w"]
 _data = {
@@ -371,15 +387,16 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wh1x"]
-size = Vector2(2, 14)
+size = Vector2(2, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rcgoc"]
 size = Vector2(7, 12)
 
 [node name="Player" type="CharacterBody2D"]
-z_index = 10
+z_index = 1
 collision_layer = 2
 script = ExtResource("1_wgk0q")
+speed = 112.0
 jump_velocity = -280.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -430,10 +447,16 @@ shape = SubResource("RectangleShape2D_rcgoc")
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ffwgi")
-volume_db = -20.0
+volume_db = -15.0
 
 [node name="WalkSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_x6qf3")
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_u1o1e")
+
+[node name="SpawnSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_1wjt0")
 
 [connection signal="body_entered" from="InteractTrigger" to="." method="_on_interact_trigger_body_entered"]
 [connection signal="body_exited" from="InteractTrigger" to="." method="_on_interact_trigger_body_exited"]

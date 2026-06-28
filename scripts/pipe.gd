@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name Projector
+class_name pipe
 enum Type {
 	NONE,
 	ENTRANCE,

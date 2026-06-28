@@ -7,8 +7,8 @@ extends Node2D
 var velocity: Vector2
 
 func _ready() -> void:
-	var theta: float = ((PI * 2.0) / 7.0) * frag_index + PI * 0.5
-	velocity = -Vector2(cos(theta), sin(theta)) * 60.0
+	var theta: float = ((PI * 2.0) / 7.0) * frag_index
+	velocity = Vector2(cos(theta), -sin(theta)) * 60.0
 	sprite.region_rect = Rect2i(frag_index * 16, 0, 16, 16)
 	sprite.z_index = 5
 

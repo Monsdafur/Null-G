@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cjwc38uu7ekgi"]
 
-[ext_resource type="Script" path="res://scripts/projector.gd" id="1_rjqua"]
-[ext_resource type="Texture2D" uid="uid://do0pqqgxcf665" path="res://assets/textures/tilemap.png" id="2_8a870"]
+[ext_resource type="Script" path="res://scripts/pipe.gd" id="1_duy84"]
+[ext_resource type="Texture2D" uid="uid://do0pqqgxcf665" path="res://assets/textures/tilemap.png" id="2_lhtpf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_14thd"]
 size = Vector2(14, 9)
@@ -10,7 +10,7 @@ size = Vector2(14, 9)
 size = Vector2(4, 2)
 
 [node name="Projector" type="Node2D"]
-script = ExtResource("1_rjqua")
+script = ExtResource("1_duy84")
 
 [node name="Collider" type="StaticBody2D" parent="."]
 position = Vector2(0, 3.5)
@@ -29,7 +29,7 @@ debug_color = Color(0.988895, 0, 0.296781, 0.42)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture_repeat = 1
-texture = ExtResource("2_8a870")
+texture = ExtResource("2_lhtpf")
 region_enabled = true
 region_rect = Rect2(64, 128, 16, 16)
 

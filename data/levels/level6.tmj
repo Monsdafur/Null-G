@@ -83,7 +83,7 @@
                  "gid":69,
                  "height":16,
                  "id":3,
-                 "name":"projector",
+                 "name":"pipe",
                  "properties":[
                         {
                          "name":"type",
@@ -101,7 +101,7 @@
                  "gid":69,
                  "height":16,
                  "id":6,
-                 "name":"projector",
+                 "name":"pipe",
                  "properties":[
                         {
                          "name":"type",
