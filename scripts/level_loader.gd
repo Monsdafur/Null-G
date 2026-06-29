@@ -5,7 +5,6 @@ extends Node2D
 @export var atlas_width: int
 @onready var player_spawn_timer: Timer = $PlayerSpawnDelay
 @onready var transition_filter: CanvasLayer = $TransitionFilter
-@onready var glitch_filter: CanvasLayer = $GlitchFilter
 
 var tileset: Resource = preload("res://assets/tileset/level.tres")
 
@@ -16,6 +15,7 @@ var ins_player: Resource = preload("res://scenes/player.tscn")
 var ins_pipe: Resource = preload("res://scenes/pipe.tscn")
 var ins_emitter: Resource = preload("res://scenes/ray_emitter.tscn")
 var ins_box: Resource = preload("res://scenes/box.tscn")
+var ins_instruction: Resource = preload("res://scenes/instruction.tscn")
 
 var map_data: Dictionary
 var map_width: int
@@ -27,7 +27,9 @@ var platforms: Dictionary
 var emitters: Array[Node2D]
 var pressure_pads: Array[Area2D]
 var boxes: Array[CharacterBody2D]
+var instructions: Array[Node2D]
 var player: CharacterBody2D
+var reloading: bool =  false
 
 var player_spawn_point: Vector2
 
@@ -197,6 +199,26 @@ func load_pressure_pad(data: Dictionary) -> void:
 	add_child(pressure_pad)
 	pressure_pads.append(pressure_pad)
 	
+func load_instruction(data: Dictionary) -> void:
+	var gid: int = int(data["gid"]) - 1
+	var radius: float = float(data["properties"][0]["value"])
+	var x: int = int(data["properties"][1]["value"])
+	var y: int = int(data["properties"][2]["value"])
+	var instruction_position: Vector2 = Vector2(float(data["x"]), float(data["y"])) + Vector2(8.0, -8.0)
+	var target: Vector2 = Vector2(x * 16.0, y * 16.0) + Vector2(8.0, 8.0)
+	var atlas_position: Vector2i = Vector2i(gid % atlas_width, gid / atlas_width) * 16
+	
+	var instruction: Node2D = ins_instruction.instantiate()
+	instruction.position = instruction_position
+	instruction.target = target
+	instruction.radius = radius
+	add_child(instruction)
+	instruction.sprite.self_modulate.a = 0.0
+	instruction.sprite.region_enabled = true
+	instruction.sprite.region_rect = Rect2i(atlas_position, Vector2i(16, 16))
+	instruction.sprite.z_index = 10
+	instructions.append(instruction)
+	
 func load_objects(data: Dictionary) -> void:
 	var objects_data: Array = data["objects"]
 	var pipes_data: Array[Dictionary]
@@ -213,6 +235,8 @@ func load_objects(data: Dictionary) -> void:
 				spikes_data.append(object)
 			"pressure pad":
 				pressure_pads_data.append(object)
+			"instruction":
+				load_instruction(object)
 				
 	for object: Dictionary in pipes_data:
 		load_pipe(object)
@@ -233,6 +257,9 @@ func spawn_player() -> void:
 	add_child(player)
 	player.get_node("AnimationTree").death.connect(_on_player_death)
 	player.get_node("AnimationTree").win.connect(_on_player_win)
+	
+	for instruction: Node2D in instructions:
+		instruction.player = player
 
 func clear_level() -> void:
 	player.queue_free()
@@ -251,6 +278,7 @@ func clear_level() -> void:
 	for key: int in platforms:
 		platforms[key].queue_free()
 	platforms.clear()
+	
 	for pad: Area2D in pressure_pads:
 		pad.queue_free()
 	pressure_pads.clear()
@@ -258,9 +286,13 @@ func clear_level() -> void:
 		if not box == null:
 			box.queue_free()
 	boxes.clear()
+	for instruction: Node2D in instructions:
+		instruction.queue_free()
+	instructions.clear()
 	has_entrance = false
 	
 func reload() -> void:
+	reloading = true
 	player_spawn_timer.start()
 	await player_spawn_timer.timeout
 	transition_filter.reverse = true;
@@ -270,10 +302,9 @@ func reload() -> void:
 	load_level()
 	transition_filter.reverse = false;
 	transition_filter.timer.start();
-	glitch_filter.timer.start()
-	glitch_filter.stop = false
 	await transition_filter.timer.timeout
 	spawn_player()
+	reloading = false
 
 func _ready() -> void:
 	transition_filter.timer.start()
@@ -282,7 +313,7 @@ func _ready() -> void:
 	spawn_player()
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("reload"):
+	if Input.is_action_just_pressed("reload") and not reloading:
 		reload()
 	
 func _on_player_death() ->void:
