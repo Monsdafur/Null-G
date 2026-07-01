@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://bq6n4nbtkqnqw" path="res://assets/audio/activation.wav" id="3_lw2lh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uvh7y"]
-size = Vector2(15.95, 15.95)
+size = Vector2(15.9, 15.9)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2r3w"]
 size = Vector2(14, 13)
