@@ -332,9 +332,19 @@ func _process(delta: float) -> void:
 		overlay.color.a = min(0.5, overlay.color.a + delta)
 	else:
 		overlay.color.a = max(0.0, overlay.color.a - delta)
-	tilemap_layers["blueprint0"].self_modulate.a = overlay.color.a / 0.5
+	if tilemap_layers.has("blueprint0"):
+		tilemap_layers["blueprint0"].self_modulate.a = overlay.color.a / 0.5
 	for box: CharacterBody2D in boxes:
 		box.highlight.self_modulate.a = overlay.color.a / 0.5
+	for pipe: Node2D in pipes:
+		pipe.highlight.self_modulate.a = overlay.color.a / 0.5
+		
+	if Input.is_action_just_pressed("next"):
+		level += 1
+		if level > max_level:
+			level = 1
+		load_map_data()
+		reload(true)
 		
 func _on_player_death() ->void:
 	reload()

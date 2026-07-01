@@ -33,4 +33,12 @@ texture = ExtResource("2_lhtpf")
 region_enabled = true
 region_rect = Rect2(64, 128, 16, 16)
 
+[node name="Highlight" type="Sprite2D" parent="."]
+z_index = 10
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("2_lhtpf")
+region_enabled = true
+region_rect = Rect2(0, 544, 16, 16)
+
 [connection signal="body_entered" from="Trigger" to="." method="_on_trigger_body_entered"]

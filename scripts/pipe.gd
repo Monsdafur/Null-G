@@ -5,8 +5,6 @@ enum Type {
 	NONE,
 	ENTRANCE,
 	EXIT,
-	TELEPORT_IN,
-	TELEPORT_OUT,
 }
 
 @export var type: Type = Type.NONE
@@ -15,9 +13,15 @@ enum Type {
 @onready var collider: StaticBody2D = $Collider
 @onready var trigger: Area2D = $Trigger
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var highlight: Sprite2D = $Highlight
 
 func _ready() -> void:
 	sprite.region_rect = Rect2i(64, 128, 16, 16) if not reversed else Rect2i(80, 128, 16, 16)
+	match type:
+		Type.ENTRANCE:
+			highlight.region_rect = Rect2i(0, 544, 16, 16)
+		Type.EXIT:
+			highlight.region_rect = Rect2i(16, 544, 16, 16)
 	collider.position = Vector2(0.0, 3.5) if not reversed else Vector2(0.0, -3.5)
 	trigger.position = Vector2(0.0, -2.0) if not reversed else Vector2(0.0, 2.0)
 

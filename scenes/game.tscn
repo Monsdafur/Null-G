@@ -11,8 +11,8 @@ zoom = Vector2(2, 2)
 
 [node name="Level" parent="." instance=ExtResource("3_rgulm")]
 position = Vector2(-400, -224)
-level = 7
-max_level = 7
+level = 8
+max_level = 8
 atlas_width = 8
 
 [node name="TransitionFilter" parent="Level" instance=ExtResource("2_nfqtn")]
