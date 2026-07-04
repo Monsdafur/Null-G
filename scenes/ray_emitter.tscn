@@ -129,6 +129,7 @@ script = ExtResource("1_keesk")
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1177161895]
 
 [node name="Trigger" type="Area2D" parent="." unique_id=1500528019]
+z_index = 10
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger" unique_id=1351302006]

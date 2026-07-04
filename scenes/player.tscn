@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://xqnax3rga56a" path="res://assets/audio/spawn.wav" id="7_1wjt0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bfk5"]
-size = Vector2(9, 14)
+size = Vector2(9, 13)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4t6nj"]
 animation = &"death"
@@ -400,7 +400,7 @@ speed = 128.0
 jump_velocity = -280.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=373575936]
-position = Vector2(-0.5, 1)
+position = Vector2(-0.5, 1.5)
 shape = SubResource("RectangleShape2D_8bfk5")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=2141730790]

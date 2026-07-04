@@ -147,7 +147,7 @@ func load_pressure_pad(entity_position: Vector2, entity: Dictionary, order: int,
 	add_child(pressure_pad)
 	pressure_pads.append(pressure_pad)
 	
-func load_instruction(entity_position: Vector2, entity: Dictionary, order: int) -> void:
+func load_instruction(entity_position: Vector2, entity: Dictionary) -> void:
 	var properties: Array = entity["fieldInstances"]
 	var px: float = float(properties[0]["__value"]["cx"])
 	var py: float = float(properties[0]["__value"]["cy"])
@@ -195,7 +195,7 @@ func load_entities(entity_layer: Dictionary, order: int) -> void:
 			"PressurePadInv":
 				pad_inv_data[entity_position] = entity
 			"Instruction":
-				load_instruction(entity_position, entity, order)
+				load_instruction(entity_position, entity)
 				
 	for entity_position: Vector2 in platform_data:
 		load_platform(entity_position, platform_data[entity_position], order)
@@ -213,6 +213,43 @@ func load_entities(entity_layer: Dictionary, order: int) -> void:
 	for entity_position: Vector2 in pad_inv_data:
 		load_pressure_pad(entity_position, pad_inv_data[entity_position], order, true)
 
+func load_emitter(cell_position: Vector2i, direction: RayEmitter.Direction) -> void:
+	var emitter_position: Vector2 = Vector2(cell_position) * 16.0 + Vector2(8.0, 8.0)
+	var emitter: Node2D = ins_emitter.instantiate()
+	emitter.direction = direction
+	add_child(emitter)
+	emitter.position = emitter_position
+	emitter.z_index = 1
+	emitters.append(emitter)
+	
+func load_layer(layer: Dictionary, order: int) -> void:
+	var id: int = 0
+	if layer["__identifier"] == "Blueprint":
+		overlay.z_index = order
+	var tilemap_layer: TileMapLayer = TileMapLayer.new()
+	tilemap_layer.tile_set = tileset
+	for cell: Dictionary in layer["autoLayerTiles"]:
+		var cell_position: Vector2i = Vector2i(int(cell["px"][0]), int(cell["px"][1]))
+		cell_position /= 16
+		var atlas_coord: Vector2i = Vector2i(int(cell["src"][0]), int(cell["src"][1]))
+		id = 1 if layer["__identifier"] == "Water" or (atlas_coord.x == 48 and atlas_coord.y == 464) else 0
+		atlas_coord /= 16
+		tilemap_layer.set_cell(cell_position, id, atlas_coord)
+		
+		if atlas_coord.y == 6:
+			if atlas_coord.x == 0:
+				load_emitter(cell_position, RayEmitter.Direction.RIGHT)
+			elif atlas_coord.x == 1:
+				load_emitter(cell_position, RayEmitter.Direction.DOWN)
+			elif atlas_coord.x == 2:
+				load_emitter(cell_position, RayEmitter.Direction.UP)
+			elif atlas_coord.x == 3:
+				load_emitter(cell_position, RayEmitter.Direction.LEFT)
+				
+	add_child(tilemap_layer)
+	tilemap_layers[layer["__identifier"]] = tilemap_layer
+	tilemap_layer.z_index = order
+
 func load_level() -> void:
 	audio_stream_manager.stop_all()
 	var order: int = map_data["levels"][level]["layerInstances"].size()
@@ -221,24 +258,7 @@ func load_level() -> void:
 		if layer["__type"] == "Entities":
 			load_entities(layer, order)
 		else:
-			var tilemap_layer: TileMapLayer = TileMapLayer.new()
-			tilemap_layer.tile_set = tileset
-			for cell: Dictionary in layer["autoLayerTiles"]:
-				var cell_position: Vector2i = Vector2i(int(cell["px"][0]), int(cell["px"][1]))
-				cell_position /= 16
-				var atlas_coord: Vector2i = Vector2i(int(cell["src"][0]), int(cell["src"][1]))
-				atlas_coord /= 16
-				tilemap_layer.set_cell(cell_position, 0, atlas_coord)
-			for cell: Dictionary in layer["gridTiles"]:
-				var cell_position: Vector2i = Vector2i(int(cell["px"][0]), int(cell["px"][1]))
-				cell_position /= 16
-				var atlas_coord: Vector2i = Vector2i(int(cell["src"][0]), int(cell["src"][1]))
-				atlas_coord /= 16
-				tilemap_layer.set_cell(cell_position, 0, atlas_coord)
-			add_child(tilemap_layer)
-			print(layer["__identifier"])
-			tilemap_layers[layer["__identifier"]] = tilemap_layer
-			tilemap_layer.z_index = order
+			load_layer(layer, order)
 		order -= 1
 
 func spawn_player() -> void:

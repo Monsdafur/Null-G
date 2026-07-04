@@ -41,7 +41,6 @@ func _ready() -> void:
 				segment.play("vertical")
 				hit.play("down");
 	ray.target_position = ray.position + direction_vector * 30.0 * 16.0
-	ray.position += direction_vector * 8.0
 
 func _process(_delta: float) -> void:
 	if not ray.is_colliding():
@@ -57,10 +56,10 @@ func _process(_delta: float) -> void:
 	segment.position = offset
 	hit.global_position = point - direction_vector * 8.0
 	if direction == Direction.UP or direction == Direction.DOWN:
-		trigger.get_node("CollisionShape2D").shape.size = Vector2(4.0, length)
+		trigger.get_node("CollisionShape2D").shape.size = Vector2(2.0, length)
 		segment.scale = Vector2(1.0, length / 16.0)
 	elif direction == Direction.RIGHT or direction == Direction.LEFT:
-		trigger.get_node("CollisionShape2D").shape.size = Vector2(length, 4.0)
+		trigger.get_node("CollisionShape2D").shape.size = Vector2(length, 2.0)
 		segment.scale = Vector2(length / 16.0, 1.0)
 
 func _on_trigger_body_entered(_body: Node2D) -> void:

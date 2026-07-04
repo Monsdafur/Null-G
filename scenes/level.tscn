@@ -19,4 +19,3 @@ stream = ExtResource("2_w8frs")
 
 [node name="LaserSound" type="AudioStreamPlayer" parent="AudioStreamManager" unique_id=1620359443]
 stream = ExtResource("3_mx8sn")
-volume_db = 10.0
