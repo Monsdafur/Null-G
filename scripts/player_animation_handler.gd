@@ -5,6 +5,7 @@ extends AnimationTree
 @onready var state_machine: AnimationNodeStateMachinePlayback = get("parameters/playback")
 @onready var death_sound: AudioStreamPlayer = $"../DeathSound"
 @onready var spawn_sound: AudioStreamPlayer = $"../SpawnSound"
+@onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
 
 signal death
 signal win
@@ -48,20 +49,28 @@ func _on_global_game_over() -> void:
 	if dead:
 		return
 	dead = true
-		
+
 	set_process(false)
 	death_sound.play()
 	state_machine.travel("death")
 	player_movement.set_physics_process(false)
+	while state_machine.get_current_node() != "death":
+		await get_tree().process_frame
 	await animation_finished
 	sprite.visible = false
 	death.emit()
 	
 func _on_global_level_cleared() -> void:
+	if dead:
+		return
+	dead = true
+	
 	set_process(false)
 	spawn_sound.play()
 	state_machine.travel("death")
 	player_movement.set_physics_process(false)
+	while state_machine.get_current_node() != "death":
+		await get_tree().process_frame
 	await animation_finished
 	sprite.visible = false
 	win.emit()
