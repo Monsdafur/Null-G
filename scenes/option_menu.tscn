@@ -49,7 +49,7 @@ grow_vertical = 2
 keep_pressed_outside = true
 label_text = "MUSIC"
 
-[node name="EffectCheckbox" parent="MenuManager" unique_id=1368015728 instance=ExtResource("2_1xj3o")]
+[node name="WaterEffectCheckbox" parent="MenuManager" unique_id=1368015728 instance=ExtResource("2_1xj3o")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -63,7 +63,7 @@ offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
 keep_pressed_outside = true
-label_text = "EFFECT"
+label_text = "WATER EFFECT"
 
 [node name="Return" type="Button" parent="MenuManager" unique_id=925072773]
 layout_mode = 0
@@ -96,5 +96,5 @@ one_shot = true
 
 [connection signal="toggle" from="MenuManager/SoundCheckbox" to="." method="_on_sound_checkbox_toggle"]
 [connection signal="toggle" from="MenuManager/MusicCheckbox" to="." method="_on_music_checkbox_toggle"]
-[connection signal="toggle" from="MenuManager/EffectCheckbox" to="." method="_on_effect_checkbox_toggle"]
+[connection signal="toggle" from="MenuManager/WaterEffectCheckbox" to="." method="_on_effect_checkbox_toggle"]
 [connection signal="button_up" from="MenuManager/Return" to="." method="_on_return_button_up"]

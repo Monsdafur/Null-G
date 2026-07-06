@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var sound_checkbox: Button = $MenuManager/SoundCheckbox
 @onready var music_checkbox: Button = $MenuManager/MusicCheckbox
-@onready var effect_checkbox: Button = $MenuManager/EffectCheckbox
+@onready var effect_checkbox: Button = $MenuManager/WaterEffectCheckbox
 @onready var return_button: Button = $MenuManager/Return
 @onready var transition_filter: CanvasLayer = $TransitionFilter
 

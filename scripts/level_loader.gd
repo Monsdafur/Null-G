@@ -9,6 +9,7 @@ extends Node2D
 
 var tileset: Resource = preload("res://assets/tileset/tileset.tres")
 var water_tileset: Resource = preload("res://assets/tileset/water.tres")
+var water_effect: Resource = preload("res://assets/shaders/water_effect_material.tres")
 
 var ins_pressure_pad: Resource = preload("res://scenes/pressure_pad.tscn")
 var ins_platform: Resource = preload("res://scenes/platform.tscn")
@@ -253,6 +254,9 @@ func load_layer(layer: Dictionary, order: int) -> void:
 	add_child(tilemap_layer)
 	tilemap_layers[layer["__identifier"]] = tilemap_layer
 	tilemap_layer.z_index = order
+	
+	if layer["__identifier"] == "DangerousWater" and global.effect_on:
+		tilemap_layers["DangerousWater"].material = water_effect
 
 func load_level() -> void:
 	audio_stream_manager.stop_all()
