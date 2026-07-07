@@ -3,8 +3,6 @@ extends CharacterBody2D
 @export var speed = 96.0
 @export var jump_velocity = -250.0
 
-@onready var interact_trigger: Area2D = $InteractTrigger
-
 var direction: int
 var allow_move: bool = false
 var is_holding: bool = false
@@ -28,7 +26,6 @@ func _physics_process(delta: float) -> void:
 			direction += 1
 	
 	if not direction == 0:
-		interact_trigger.position.x = 5.0 if direction == 1 else -6.0
 		velocity.x = speed * direction
 	else:	
 		velocity.x = move_toward(velocity.x, 0, speed)

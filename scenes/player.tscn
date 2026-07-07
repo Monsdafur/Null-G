@@ -151,7 +151,7 @@ states/death/position = Vector2(415, -135)
 states/falling/node = SubResource("AnimationNodeAnimation_t4khd")
 states/falling/position = Vector2(502, -44)
 states/idle/node = SubResource("AnimationNodeAnimation_2gtgv")
-states/idle/position = Vector2(322, 99)
+states/idle/position = Vector2(322, 99.159996)
 states/jump_up/node = SubResource("AnimationNodeAnimation_6ew1n")
 states/jump_up/position = Vector2(322, -44)
 states/push/node = SubResource("AnimationNodeAnimation_8w2x3")
@@ -163,7 +163,7 @@ states/running/position = Vector2(502, 99)
 states/spawn/node = SubResource("AnimationNodeAnimation_dhixp")
 states/spawn/position = Vector2(96, 99)
 transitions = ["idle", "running", SubResource("AnimationNodeStateMachineTransition_gx8kv"), "running", "idle", SubResource("AnimationNodeStateMachineTransition_u8mvm"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_0m1vl"), "running", "death", SubResource("AnimationNodeStateMachineTransition_43hwh"), "jump_up", "idle", SubResource("AnimationNodeStateMachineTransition_xqis0"), "idle", "jump_up", SubResource("AnimationNodeStateMachineTransition_p8j4c"), "jump_up", "running", SubResource("AnimationNodeStateMachineTransition_by16j"), "running", "jump_up", SubResource("AnimationNodeStateMachineTransition_0v7wa"), "jump_up", "falling", SubResource("AnimationNodeStateMachineTransition_n4ji3"), "idle", "falling", SubResource("AnimationNodeStateMachineTransition_37r15"), "falling", "idle", SubResource("AnimationNodeStateMachineTransition_g23uu"), "running", "falling", SubResource("AnimationNodeStateMachineTransition_lrw3w"), "falling", "running", SubResource("AnimationNodeStateMachineTransition_7738o"), "jump_up", "death", SubResource("AnimationNodeStateMachineTransition_8vegk"), "falling", "death", SubResource("AnimationNodeStateMachineTransition_uuwxt"), "Start", "spawn", SubResource("AnimationNodeStateMachineTransition_rvtg3"), "spawn", "idle", SubResource("AnimationNodeStateMachineTransition_nk36t"), "idle", "push_idle", SubResource("AnimationNodeStateMachineTransition_161mx"), "push_idle", "idle", SubResource("AnimationNodeStateMachineTransition_j623x"), "push_idle", "running", SubResource("AnimationNodeStateMachineTransition_6khhf"), "running", "push_idle", SubResource("AnimationNodeStateMachineTransition_p873e"), "running", "push", SubResource("AnimationNodeStateMachineTransition_tkdu6"), "push", "running", SubResource("AnimationNodeStateMachineTransition_mij0l"), "push", "idle", SubResource("AnimationNodeStateMachineTransition_80xir"), "idle", "push", SubResource("AnimationNodeStateMachineTransition_fi7ce"), "push", "push_idle", SubResource("AnimationNodeStateMachineTransition_sc43u"), "push_idle", "push", SubResource("AnimationNodeStateMachineTransition_vu5px")]
-graph_offset = Vector2(-121, -122)
+graph_offset = Vector2(-281, -1)
 
 [sub_resource type="Animation" id="Animation_asms3"]
 length = 0.001
@@ -387,7 +387,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wh1x"]
-size = Vector2(2, 11)
+size = Vector2(2, 9.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rcgoc"]
 size = Vector2(7, 12)
@@ -400,6 +400,7 @@ speed = 128.0
 jump_velocity = -280.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=373575936]
+z_index = 1
 position = Vector2(-0.5, 1.5)
 shape = SubResource("RectangleShape2D_8bfk5")
 
@@ -420,7 +421,6 @@ active = false
 libraries/ = SubResource("AnimationLibrary_tt03w")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=426367053]
-z_index = 2
 texture_filter = 1
 texture_repeat = 1
 texture = ExtResource("1_aaqob")
@@ -430,7 +430,7 @@ frame = 5
 region_rect = Rect2(0, 64, 16, 16)
 
 [node name="InteractTrigger" type="Area2D" parent="." unique_id=813208814]
-position = Vector2(5, 0)
+position = Vector2(5, 1.375)
 collision_layer = 0
 collision_mask = 4
 
@@ -439,10 +439,10 @@ shape = SubResource("RectangleShape2D_0wh1x")
 debug_color = Color(1, 0, 0, 0.419608)
 
 [node name="CrushTrigger" type="Area2D" parent="." unique_id=1365877832 groups=["water"]]
+position = Vector2(-0.5, 1)
 collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CrushTrigger" unique_id=1091479281]
-position = Vector2(-0.5, 1)
 shape = SubResource("RectangleShape2D_rcgoc")
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="." unique_id=1142838321]

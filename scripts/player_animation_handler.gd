@@ -1,6 +1,7 @@
 extends AnimationTree
 
 @onready var player_movement: CharacterBody2D = $".."
+@onready var interact_trigger: Area2D = $"../InteractTrigger"
 @onready var sprite: Sprite2D = $"../Sprite2D"
 @onready var state_machine: AnimationNodeStateMachinePlayback = get("parameters/playback")
 @onready var death_sound: AudioStreamPlayer = $"../DeathSound"
@@ -38,12 +39,13 @@ func _process(_delta: float) -> void:
 				state_machine.travel("running")
 	
 	if not player_movement.direction == 0:
+		interact_trigger.position.x = 5.0 if player_movement.direction == 1 else -6.0
 		if player_movement.direction == -1:
 			sprite.flip_h = true
 		else:
 			sprite.flip_h = false
 	sprite.offset.x = -1.0 if sprite.flip_h else 0.0
-	sprite.offset.y = 2.5 if sprite.flip_v else 0.0
+	sprite.offset.y = 3.0 if sprite.flip_v else 0.0
 
 func _on_global_game_over() -> void:
 	if dead:
