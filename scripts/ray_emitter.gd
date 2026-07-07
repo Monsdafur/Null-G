@@ -56,10 +56,10 @@ func _process(_delta: float) -> void:
 	segment.position = offset
 	hit.global_position = point - direction_vector * 8.0
 	if direction == Direction.UP or direction == Direction.DOWN:
-		trigger.get_node("CollisionShape2D").shape.size = Vector2(2.0, length)
+		trigger.get_node("CollisionShape2D").shape.size = Vector2(2.0, length - 0.5)
 		segment.scale = Vector2(1.0, length / 16.0)
 	elif direction == Direction.RIGHT or direction == Direction.LEFT:
-		trigger.get_node("CollisionShape2D").shape.size = Vector2(length, 2.0)
+		trigger.get_node("CollisionShape2D").shape.size = Vector2(length - 0.5, 2.0)
 		segment.scale = Vector2(length / 16.0, 1.0)
 
 func _on_trigger_body_entered(_body: Node2D) -> void:

@@ -9,6 +9,7 @@ extends Node2D
 
 var tileset: Resource = preload("res://assets/tileset/tileset.tres")
 var water_tileset: Resource = preload("res://assets/tileset/water.tres")
+var glass_tileset: Resource = preload("res://assets/tileset/glass.tres")
 var water_effect: Resource = preload("res://assets/shaders/water_effect_material.tres")
 
 var ins_pressure_pad: Resource = preload("res://scenes/pressure_pad.tscn")
@@ -237,6 +238,8 @@ func load_layer(layer: Dictionary, order: int) -> void:
 		if layer["__identifier"] == "Water" or layer["__identifier"] == "DangerousWater":
 			tilemap_layer.tile_set = water_tileset
 			tilemap_layer.add_to_group("water")
+		elif layer["__identifier"] == "Glass":
+			tilemap_layer.tile_set = glass_tileset
 		else:
 			tilemap_layer.tile_set = tileset
 		tilemap_layer.set_cell(cell_position, 0, atlas_coord)

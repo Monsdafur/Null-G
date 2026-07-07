@@ -20,7 +20,7 @@ zoom = Vector2(2, 2)
 [node name="Level" parent="." unique_id=183393350 instance=ExtResource("3_rgulm")]
 process_mode = 1
 position = Vector2(-480, -256)
-max_level = 9
+max_level = 10
 
 [node name="PauseMenu" type="Control" parent="." unique_id=663006360]
 process_mode = 2

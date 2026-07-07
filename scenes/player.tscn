@@ -394,7 +394,8 @@ size = Vector2(7, 12)
 
 [node name="Player" type="CharacterBody2D" unique_id=1589274936]
 z_index = 1
-collision_layer = 2
+collision_layer = 34
+collision_mask = 33
 script = ExtResource("1_wgk0q")
 speed = 128.0
 jump_velocity = -280.0
