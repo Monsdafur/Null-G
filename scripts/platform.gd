@@ -29,7 +29,6 @@ func set_reverse(value: bool) -> void:
 	distance = position.distance_to(destination)
 
 func _ready() -> void:
-	position = p0
 	sprite.region_enabled = true
 	var shape: RectangleShape2D = RectangleShape2D.new()
 	if type == Type.HORIZONTAL:
