@@ -9,6 +9,18 @@
 font = ExtResource("4_gxua3")
 font_color = Color(0.24705882, 0.12156863, 0.24705882, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_axpsw"]
+font = ExtResource("4_gxua3")
+font_color = Color(0.24705882, 0.12156863, 0.24705882, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_x1jhq"]
+font = ExtResource("4_gxua3")
+font_color = Color(0.24705882, 0.12156863, 0.24705882, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_633j0"]
+font = ExtResource("4_gxua3")
+font_color = Color(0.24705882, 0.12156863, 0.24705882, 1)
+
 [sub_resource type="Animation" id="Animation_kj1jt"]
 length = 0.001
 tracks/0/type = "value"
@@ -23,10 +35,46 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(0.24705882, 0.12156863, 0.24705882, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Credits/Label:label_settings:font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.24705882, 0.12156863, 0.24705882, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Credits/Names:label_settings:font_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.24705882, 0.12156863, 0.24705882, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Credits/Roles:label_settings:font_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.24705882, 0.12156863, 0.24705882, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_jv2w3"]
 resource_name = "fade in"
-length = 10.0
+length = 20.0
 step = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -35,8 +83,8 @@ tracks/0/path = NodePath(".:label_settings:font_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 8.5, 10),
-"transitions": PackedFloat32Array(1, 0.5, 1, 1),
+"times": PackedFloat32Array(0, 1, 19, 20),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
 "update": 0,
 "values": [Color(0.24705882, 0.12156863, 0.24705882, 1), Color(0.7490196, 0.37254903, 0.30980393, 1), Color(0.7490196, 0.37254903, 0.30980393, 1), Color(0.24705882, 0.12156863, 0.24705882, 1)]
 }
@@ -47,12 +95,48 @@ tracks/1/path = NodePath("../..")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(10),
+"times": PackedFloat32Array(20),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"change_to_main_menu"
 }]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Credits/Label:label_settings:font_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3, 4, 19, 20),
+"transitions": PackedFloat32Array(1, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Color(0.24705882, 0.12156863, 0.24705882, 1), Color(0.7490196, 0.37254903, 0.30980393, 1), Color(0.7490196, 0.37254903, 0.30980393, 1), Color(0.24705882, 0.12156863, 0.24705882, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Credits/Names:label_settings:font_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(3, 4, 19, 20),
+"transitions": PackedFloat32Array(1, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Color(0.24705882, 0.12156863, 0.24705882, 1), Color(0.7490196, 0.37254903, 0.30980393, 1), Color(0.7490196, 0.37254903, 0.30980393, 1), Color(0.24705882, 0.12156863, 0.24705882, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Credits/Roles:label_settings:font_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(3, 4, 19, 20),
+"transitions": PackedFloat32Array(1, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Color(0.24705882, 0.12156863, 0.24705882, 1), Color(0.7490196, 0.37254903, 0.30980393, 1), Color(0.7490196, 0.37254903, 0.30980393, 1), Color(0.24705882, 0.12156863, 0.24705882, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s8mdw"]
@@ -71,29 +155,86 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -14.0
+offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="Control" unique_id=1977770496]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -88.0
-offset_top = -16.0
-offset_right = 90.0
-offset_bottom = 7.0
+offset_left = -110.0
+offset_right = 110.0
+offset_bottom = 39.0
+grow_horizontal = 2
+text = "THANK YOU FOR PLAYING
+"
+label_settings = SubResource("LabelSettings_rawol")
+horizontal_alignment = 1
+
+[node name="Credits" type="Control" parent="Control/Label" unique_id=914547354]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_top = 34.0
+offset_right = 160.0
+offset_bottom = 210.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Control/Label/Credits" unique_id=2071134445]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_right = 30.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "CREDITS"
+label_settings = SubResource("LabelSettings_axpsw")
+
+[node name="Names" type="Label" parent="Control/Label/Credits" unique_id=1491879017]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 32.0
+offset_right = 134.0
+offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "THANK YOU FOR PLAYING"
-label_settings = SubResource("LabelSettings_rawol")
+text = "MONSDAFUR
+HIKARI RAINBOW"
+label_settings = SubResource("LabelSettings_x1jhq")
+
+[node name="Roles" type="Label" parent="Control/Label/Credits" unique_id=575900736]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -132.0
+offset_top = 32.0
+offset_right = -18.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Code, art, sound
+Puzzle design"
+label_settings = SubResource("LabelSettings_633j0")
+horizontal_alignment = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Label" unique_id=1238557501]
 libraries/ = SubResource("AnimationLibrary_s8mdw")
 
 [node name="FadeScreen" parent="." unique_id=1603686575 instance=ExtResource("3_fjxr3")]
+visible = false
 z_index = 10
 
 [node name="Title" parent="." unique_id=1194193911 instance=ExtResource("4_ojf8p")]
