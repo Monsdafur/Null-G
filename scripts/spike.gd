@@ -24,7 +24,6 @@ func activate() -> void:
 	if state == State.IDLING:
 		return
 	state = State.ACTIVATING
-	area.process_mode = Node.PROCESS_MODE_INHERIT
 	activate_sound.play()
 	animated_sprite.play(activated_animation)
 	
@@ -54,6 +53,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if state == State.ACTIVATING:
 		state = State.IDLING
 		animated_sprite.play(idle_animation)
+		area.process_mode = Node.PROCESS_MODE_INHERIT
 	elif state == State.RETRACT:
 		state = State.RETRACT
 		animated_sprite.play(dormant_animation)
