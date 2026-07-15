@@ -11,6 +11,7 @@ enum ButtonType {
 @onready var quit_button: Button = $MenuManager/QuitButton
 @onready var fade_effect: AnimationPlayer = $FadeScreen/AnimationPlayer
 @onready var title_fade: AnimationPlayer = $Title/AnimationPlayer
+@onready var click_sound: AudioStreamPlayer = $ClickSound
 
 var button_type: ButtonType = ButtonType.NONE
 var chosen: bool = false
@@ -26,6 +27,7 @@ func _on_start_button_button_up() -> void:
 	if chosen:
 		return
 	chosen = true
+	click_sound.play()
 	button_type = ButtonType.START
 	title_fade.play("fade out")
 	fade_effect.play("fade in")
@@ -34,6 +36,7 @@ func _on_options_button_button_up() -> void:
 	if chosen:
 		return
 	chosen = true
+	click_sound.play()
 	button_type = ButtonType.OPTIONS
 	fade_effect.play("fade in")
 
@@ -41,6 +44,7 @@ func _on_quit_button_button_up() -> void:
 	if chosen:
 		return
 	chosen = true
+	click_sound.play()
 	button_type = ButtonType.QUIT
 	title_fade.play("fade out")
 	fade_effect.play("fade in")

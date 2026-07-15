@@ -4,6 +4,9 @@ extends Node2D
 @onready var effect_checkbox: Button = $MenuManager/WaterEffectCheckbox
 @onready var return_button: Button = $MenuManager/Return
 @onready var fade_effect: AnimationPlayer = $FadeScreen/AnimationPlayer
+@onready var click_sound: AudioStreamPlayer = $ClickSound
+
+var chosen: bool = false
 
 func _ready() -> void:
 	sound_checkbox.set_state(global.sound_on)
@@ -12,12 +15,20 @@ func _ready() -> void:
 	fade_effect.play("fade out")
 
 func _on_sound_checkbox_toggle(state: bool) -> void:
-	global.sound_on = state
+	if not chosen:
+		click_sound.play()
+		global.sound_on = state
 
 func _on_effect_checkbox_toggle(state: bool) -> void:
-	global.effect_on = state
+	if not chosen:
+		click_sound.play()
+		global.effect_on = state
 	
 func _on_return_button_up() -> void:
+	if chosen:
+		return
+	chosen = true
+	click_sound.play()
 	fade_effect.play("fade in")
 	await fade_effect.animation_finished
 	global.main_menu_fade = true

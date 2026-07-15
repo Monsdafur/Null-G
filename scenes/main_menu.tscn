@@ -5,6 +5,7 @@
 [ext_resource type="LabelSettings" uid="uid://cu28yf3qfxyny" path="res://assets/fonts/default_label_setting.tres" id="3_8ln24"]
 [ext_resource type="PackedScene" uid="uid://dqgu1wm2j6jx2" path="res://scenes/title.tscn" id="4_8ln24"]
 [ext_resource type="PackedScene" uid="uid://c8nnwb2ff7fi2" path="res://scenes/fade_screen.tscn" id="5_8ln24"]
+[ext_resource type="AudioStream" uid="uid://c0fwgystqejhn" path="res://assets/audio/click.wav" id="6_rtw2f"]
 
 [node name="MainMenu" type="Node2D" unique_id=1869866243]
 script = ExtResource("1_hk3h1")
@@ -83,6 +84,9 @@ horizontal_alignment = 1
 [node name="Title" parent="." unique_id=1194193911 instance=ExtResource("4_8ln24")]
 
 [node name="FadeScreen" parent="." unique_id=1603686575 instance=ExtResource("5_8ln24")]
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1140479419]
+stream = ExtResource("6_rtw2f")
 
 [connection signal="button_up" from="MenuManager/StartButton" to="." method="_on_start_button_button_up"]
 [connection signal="button_up" from="MenuManager/OptionsButton" to="." method="_on_options_button_button_up"]

@@ -6,6 +6,7 @@
 [ext_resource type="LabelSettings" uid="uid://cu28yf3qfxyny" path="res://assets/fonts/default_label_setting.tres" id="4_x6sq6"]
 [ext_resource type="PackedScene" uid="uid://c8nnwb2ff7fi2" path="res://scenes/fade_screen.tscn" id="6_laan2"]
 [ext_resource type="Texture2D" uid="uid://c1q1j0hiswf5g" path="res://assets/textures/main_menu.png" id="6_x6sq6"]
+[ext_resource type="AudioStream" uid="uid://c0fwgystqejhn" path="res://assets/audio/click.wav" id="7_laan2"]
 
 [node name="OptionMenu" type="Node2D" unique_id=285746746]
 script = ExtResource("1_hrgik")
@@ -83,6 +84,9 @@ scale = Vector2(2, 2)
 texture = ExtResource("6_x6sq6")
 
 [node name="FadeScreen" parent="." unique_id=1603686575 instance=ExtResource("6_laan2")]
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1578619922]
+stream = ExtResource("7_laan2")
 
 [connection signal="toggle" from="MenuManager/SoundCheckbox" to="." method="_on_sound_checkbox_toggle"]
 [connection signal="toggle" from="MenuManager/WaterEffectCheckbox" to="." method="_on_effect_checkbox_toggle"]

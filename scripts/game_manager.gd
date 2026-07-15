@@ -5,6 +5,9 @@ extends Node2D
 @onready var menu_button: Button = $PauseMenu/MainMenu
 @onready var game_complete_timer: Timer = $GameCompleteTimer
 @onready var fade_effect: AnimationPlayer = $FadeScreen/AnimationPlayer
+@onready var click_sound: AudioStreamPlayer = $ClickSound
+
+var option_chosen: bool = false
 
 func pause() -> void:
 	get_tree().paused = true
@@ -25,9 +28,16 @@ func _process(_delta: float) -> void:
 		pause()
 
 func _on_resume_button_up() -> void:
+	if option_chosen:
+		return
+	click_sound.play()
 	resume()
 
 func _on_main_menu_button_up() -> void:
+	if option_chosen:
+		return
+	option_chosen = true
+	click_sound.play()
 	fade_effect.play("fade in")
 	await fade_effect.animation_finished
 	get_tree().paused = false
@@ -35,6 +45,10 @@ func _on_main_menu_button_up() -> void:
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _on_quit_button_up() -> void:
+	if option_chosen:
+		return
+	option_chosen = true
+	click_sound.play()
 	fade_effect.play("fade in")
 	await fade_effect.animation_finished
 	global.quit_game()
