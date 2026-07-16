@@ -265,7 +265,6 @@ func load_layer(layer: Dictionary, order: int) -> void:
 		tilemap_layers["DangerousWater"].material = water_effect
 
 func load_level() -> void:
-	print("LEVEL LOADING")
 	audio_stream_manager.stop_all()
 	var level: Dictionary = levels["Level_%d" % global.current_level]
 	var order: int = level["layerInstances"].size()
@@ -293,7 +292,6 @@ func spawn_player() -> void:
 		instruction.sprite.visible = true
 
 func clear_level() -> void:
-	print("LEVEL CLEARING")
 	player.queue_free()
 	for key: String in tilemap_layers:
 		tilemap_layers[key].queue_free()

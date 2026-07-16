@@ -24,7 +24,6 @@ func activate() -> void:
 	if state == State.IDLING:
 		return
 	state = State.ACTIVATING
-	print("SPIKE UP SOUND")
 	activate_sound.play()
 	animated_sprite.play(activated_animation)
 	
@@ -33,7 +32,6 @@ func deactivate() -> void:
 		return
 	state = State.RETRACT
 	area.process_mode = Node.PROCESS_MODE_DISABLED
-	print("SPIKE DOWN SOUND")
 	activate_sound.play()
 	animated_sprite.play(retract_animation)
 

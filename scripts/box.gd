@@ -20,7 +20,6 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * global.gravity_scale * delta
 	elif (not on_floor_last_frame) and frame_count > 30:
-		print("BOX SOUND")
 		hit_sound.play()
 		
 	if not is_pushing or not is_on_floor():

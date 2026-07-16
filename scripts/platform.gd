@@ -45,6 +45,5 @@ func _physics_process(delta: float) -> void:
 	position = position.move_toward(destination, speed * delta)
 	if position.distance_squared_to(destination) < 0.025:
 		if distance > 16.0:
-			print("BOX SOUND")
 			bounce_sound.play()
 		active = false
