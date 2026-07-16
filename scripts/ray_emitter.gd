@@ -11,6 +11,7 @@ enum Direction {
 @export var direction: Direction = Direction.RIGHT
 @export var width: float = 2.0
 @export var length: float = 60.0
+
 @onready var trigger: Area2D = $Trigger
 @onready var segment: AnimatedSprite2D = $Segment
 @onready var hit: AnimatedSprite2D = $Hit
