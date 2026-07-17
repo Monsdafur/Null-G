@@ -27,7 +27,7 @@ Deep within an underground sewage network built by a lost civilization, a sweet 
 
   <img src="images/gravity.gif" width="512">
 
-* **Raycast Plasma Emitters:** Continuous plasma beams that can be blocked by moving platforms into their path or by using boxes as shields.
+* **Plasma Emitters:** Continuous plasma beams that can be blocked by moving platforms into their path or by using boxes as shields.
 
   <img src="images/plasma.gif" width="512">
 
