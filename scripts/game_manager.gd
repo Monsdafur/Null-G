@@ -6,6 +6,7 @@ extends Node2D
 @onready var game_complete_timer: Timer = $GameCompleteTimer
 @onready var fade_effect: AnimationPlayer = $FadeScreen/AnimationPlayer
 @onready var click_sound: AudioStreamPlayer = $ClickSound
+@onready var pause_instruction: Sprite2D = $PauseInstruction
 
 var option_chosen: bool = false
 
@@ -13,10 +14,12 @@ func pause() -> void:
 	get_tree().paused = true
 	pause_menu.visible = true
 	resume_button.grab_focus.call_deferred()
+	pause_instruction.visible = false
 	
 func resume() -> void:
 	get_tree().paused = false
 	pause_menu.visible = false
+	pause_instruction.visible = true
 	
 func _ready() -> void:
 	var sound_bus: int = AudioServer.get_bus_index("Sound")

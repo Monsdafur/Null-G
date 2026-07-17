@@ -34,7 +34,7 @@ global="*res://scripts/global.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1024
-window/size/mode=3
+window/size/mode=4
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 

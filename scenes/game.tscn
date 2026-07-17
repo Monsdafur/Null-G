@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c8nnwb2ff7fi2" path="res://scenes/fade_screen.tscn" id="5_iywne"]
 [ext_resource type="LabelSettings" uid="uid://cu28yf3qfxyny" path="res://assets/fonts/default_label_setting.tres" id="5_u5sy4"]
 [ext_resource type="AudioStream" uid="uid://c0fwgystqejhn" path="res://assets/audio/click.wav" id="6_p57ef"]
+[ext_resource type="Texture2D" uid="uid://dh3di18a2hqpp" path="res://assets/textures/tileset.png" id="7_u5sy4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x1jhq"]
 size = Vector2(202, 540.5)
@@ -123,6 +124,13 @@ z_index = 20
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1368060784]
 stream = ExtResource("6_p57ef")
+
+[node name="PauseInstruction" type="Sprite2D" parent="." unique_id=789832532]
+z_index = 10
+position = Vector2(-454, -246)
+texture = ExtResource("7_u5sy4")
+region_enabled = true
+region_rect = Rect2(16, 704, 48, 16)
 
 [connection signal="button_up" from="PauseMenu/Resume" to="." method="_on_resume_button_up"]
 [connection signal="button_up" from="PauseMenu/MainMenu" to="." method="_on_main_menu_button_up"]

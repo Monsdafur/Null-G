@@ -35,7 +35,7 @@ func _ready() -> void:
 		effect_on = bool(game_data["settings"]["effect on"])
 		current_level = int(game_data["progress"]["current level"])
 
-func quit_game() -> void:
+func save_progress() -> void:
 	var path: String = String("user://game.json")
 	var game_data: Dictionary
 	var file: FileAccess = FileAccess.open(path, FileAccess.WRITE)
@@ -50,6 +50,9 @@ func quit_game() -> void:
 	string_data = JSON.stringify(game_data, "\t")
 	file.store_string(string_data)
 	file.close()
+
+func quit_game() -> void:
+	save_progress()
 	
 	if OS.has_feature("web"):
 		JavaScriptBridge.eval("window.location.href = 'https://monsdafur.itch.io/null';")
