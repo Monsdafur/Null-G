@@ -30,9 +30,3 @@ Deep within an underground sewage network built by a lost civilization, a sweet 
 * **Plasma Emitters:** Continuous plasma beams that can be blocked by moving platforms into their path or by using boxes as shields.
 
   <img src="images/plasma.gif" width="512">
-
-## Screenshots
-![Screenshot](images/screenshot0.png)
-![Screenshot](images/screenshot1.png)
-![Screenshot](images/screenshot2.png)
-![Screenshot](images/screenshot3.png)
