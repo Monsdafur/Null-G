@@ -24,11 +24,11 @@ func update_state() -> void:
 		set_deferred("process_mode", Node.PROCESS_MODE_INHERIT)
 		shape.set_deferred("disabled", false)
 	else:
-		bodies = 0
-		if started:
-			timer.start()
 		set_deferred("process_mode", Node.PROCESS_MODE_DISABLED)
 		shape.set_deferred("disabled", true)
+		bodies = 0
+		if started and timer.is_inside_tree():
+			timer.start()
 		
 func _on_body_entered(_body: Node2D) -> void:
 	bodies += 1
@@ -49,7 +49,8 @@ func _on_body_exited(_body: Node2D) -> void:
 	bodies -= 1
 	if bodies > 0:
 		return
-	timer.start()
+	if timer.is_inside_tree():
+		timer.start()
 
 func _on_gravity_reversed() -> void:
 	if global.in_game:
