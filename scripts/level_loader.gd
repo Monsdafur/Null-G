@@ -269,6 +269,9 @@ func load_layer(layer: Dictionary, order: int) -> void:
 		tilemap_layer.material = shader_material
 		tilemap_layer.material.set_shader_parameter("enabled", true)
 		tilemap_layer.material.set_shader_parameter("noise", noise_texture)
+		tilemap_layer.material.set_shader_parameter("direction", Vector2(1.0, 1.0).normalized());
+		tilemap_layer.material.set_shader_parameter("distortion_scale", Vector2(0.5, 4.0));
+		tilemap_layer.material.set_shader_parameter("speed", 0.02);
 
 func load_level() -> void:
 	audio_stream_manager.stop_all()
