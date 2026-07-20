@@ -32,6 +32,8 @@ func update_state() -> void:
 		
 func _on_body_entered(_body: Node2D) -> void:
 	bodies += 1
+	if timer.is_inside_tree():
+		timer.stop()
 	if bodies > 1:
 		return
 	sprite.visible = false
